@@ -1,80 +1,154 @@
-/* Reset default margin and padding */
-* {
-  margin: 0;
-  padding: 0;
+*{
+  margin: 0px;
+  padding: 5px;
   box-sizing: border-box;
 }
 
-body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f4f4f4;
-  color: #333;
-  line-height: 1.6;
-  padding: 20px;
+html {
+  scroll-behavior: smooth;
 }
 
 header {
+  color: white;
   text-align: center;
-  margin-bottom: 30px;
+
 }
 
-h1 {
-  font-size: 2.5rem;
-  color: #333;
-  margin-bottom: 10px;
+header span:hover{
+  color: violet;
 }
 
-p {
-  font-size: 1.1rem;
-  color: #666;
+body {
+  background-color: black;
+  color: silver;
 }
 
-main {
-  max-width: 900px;
-  margin: 0 auto;
+body header span h1 {
+
+  text-align: center;
+  
+	position: centre;
+
+	top: 35%;
+
+	left: 20%;
+
+	background: linear-gradient(90deg, #ff0000, #ffff00, #ff00f3, #0033ff, #ff00c4, #ff0000);
+
+	background-size: 400%;
+
+	font-size: 50px;
+
+	font-family: sans-serif;
+
+	letter-spacing: 10px;
+
+	font-weight: 600;
+
+	word-spacing: 5px;
+
+	-webkit-text-fill-color: transparent;
+
+	-webkit-background-clip: text;
+
+	animation: animate 10s linear infinite;
+
 }
 
-section {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-bottom: 30px;
+
+
+@keyframes animate {
+
+	0% {
+
+		background-position: 0%;
+
+	}
+
+
+
+	100% {
+
+		background-position: 400%;
+
+	}
+
 }
 
-h2 {
-  font-size: 2rem;
-  margin-bottom: 15px;
-  color: #444;
+
+body ul {
+  color: white;
 }
 
-ul {
-  list-style-type: none;
+body ul li:hover {
+  color: orange;
 }
 
-ul li {
-  margin-bottom: 10px;
+body ul li a:hover {
+  color: orange;
 }
 
-a {
+body header {
+  color: white;
+}
+
+.navbar {
+  color: white;
+  display: flex;
+  padding: 2px;
+  justify-content: center;
+  gap: 8rem;
+}
+
+.navbar li a {
   text-decoration: none;
-  color: #3498db;
-  font-size: 1.1rem;
+  color: white;
 }
 
-a:hover {
-  color: #1d7bb5;
-  text-decoration: underline;
+#First {
+  border: white;
+  color: white;
+  background-color: violet;
+  margin: 20px;
+}
+
+#Skills {
+  border: solid;
+  padding: 30px;
+  margin: 20px;
+}
+
+#About {
+  border: solid;
+  padding: 30px;
+  margin: 20px;
+}
+
+#Download {
+  border: solid;
+  padding: 30px;
+  margin: 20px;
+}
+
+#Contact {
+  border: solid;
+  padding: 30px;
+  margin: 20px;
+}
+
+section h2:hover {
+  color: violet;
+}
+
+#Skills:hover{
+  border-color: orange;
+  border-collapse: collapse;
 }
 
 footer {
-  text-align: center;
-  font-size: 1rem;
-  color: #777;
-  margin-top: 50px;
+  text-align-last: center;
 }
 
-footer p {
-  margin-bottom: 10px;
+footer:hover{
+  color: violet;
 }
-
