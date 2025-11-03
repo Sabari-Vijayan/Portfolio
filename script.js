@@ -2,10 +2,10 @@
 
 const downBtn = document.getElementById('down-arrow-btn');
 
-downBtn.addEventListener('click', () => {
+/*downBtn.addEventListener('click', () => {
     const projectSection = document.getElementById('projects');
     projectSection.scrollIntoView({ behavior: 'smooth' });
-});
+});*/
 
 // The nav-linesfunctionalities
 
@@ -13,13 +13,21 @@ const navLines = document.querySelectorAll('.nav-lines hr');
 const sections = document.querySelectorAll('.right section');
 const rightContainer = document.getElementById('right-container');
 
+
+const what = document.getElementById('what');
+
+
 navLines.forEach((line, index) => {
     line.addEventListener('click', () => {
     if(sections[index]) {
       sections[index].scrollIntoView({behavior: 'smooth'});
+      what.textContent = sections[index].id;
     }
   });
 });
+
+//The what functionality 
+
 
 //Mobile functionalities
 //
@@ -33,6 +41,7 @@ const leftBtn = document.getElementById('left');
 leftBtn.addEventListener('click', () => {
    leftBtn.classList.toggle('expand');
    leftBtn.classList.toggle('collapse');
+    rightContainer.classList.toggle('blured');
 });
 
 //The content changes

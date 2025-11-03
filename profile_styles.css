@@ -58,6 +58,7 @@ html, body {
     font-family: 'Poppins', Sans-serif;
 
     caret-color: transparent;
+    overflow: hidden;
 }
 
 .name {
@@ -95,7 +96,7 @@ html, body {
     margin-top: 2rem;
 }
 
-img {
+.sabari-box img {
   max-width: 90%;
   max-height: 90%;
 
@@ -198,15 +199,14 @@ img {
 
 .who h2 {
     position: relative;
-}
-
-.who h4 {
-    padding-top: 2rem;
+    font-size: 1.8rem;
 }
 
 .who p {
     padding-top: 2rem;
     max-width: 85%;
+    line-height: 1.6;
+    font-size: 1.1rem;
 }
 
 .who ul {
@@ -220,6 +220,56 @@ img {
   margin-bottom: 0.8rem;
   line-height: 1.6;
   font-size: 1.2rem;
+}
+
+.flashcard-container {
+    display: flex;
+    flex-direction: row;
+    gap: -1rem;
+
+    width: 100%;
+
+    position: relative;
+
+    padding: 0;
+    margin: 0;
+}
+
+.flashcard-container img {
+  object-fit: contain;
+
+  margin: 2rem -3rem;
+
+  width: 40%;
+  height: auto;
+
+  transition: transform .25s ease;
+}
+
+#projectFlashcard {
+
+  z-index: 3;
+}
+
+#projectFlashcard:hover {
+    transform: translateY(-6px) scale(1.06);
+}
+
+#designFlashcard {
+  z-index: 1;
+
+}
+
+#designFlashcard:hover {
+  transform: translateY(-6px) scale(1.06);
+}
+
+#policyFlashcard {
+  z-index: 3;
+}
+
+#policyFlashcard:hover {
+  transform: translateY(-6px) scale(1.06);
 }
 
 .arrow {
@@ -240,6 +290,9 @@ img {
 .arrow img {
     object-fit: contain;
     padding: 0;
+
+    width: 100%;
+    height: auto;
 
     animation: bounce 2s ease-in-out infinite;
 }
@@ -344,6 +397,25 @@ section {
   .nav-lines {
       position: fixed;
       top: 85%;
+  }
+
+  .right {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .blur-overlay {
+    position: absolute;
+    inset: 0; /* covers the full area */
+    backdrop-filter: blur(12px);
+    background: rgba(0,0,0,0.1);
+    opacity: 0;
+    pointer-events: none; /* so it doesn’t block clicks */
+    transition: opacity 0.3s ease;
+  }
+
+  .right.blured .blur-overlay {
+    opacity: 1;
   }
 
 }
