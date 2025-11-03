@@ -34,3 +34,20 @@ leftBtn.addEventListener('click', () => {
    leftBtn.classList.toggle('expand');
    leftBtn.classList.toggle('collapse');
 });
+
+//The content changes
+
+const isMobile = window.matchMedia("(max-width: 768px)");
+
+const who = document.querySelector(".who h2");
+
+function handleScreenChange(e) {
+    if(e.matches) {
+    who.textContent = "Sabari Vijayan.";
+    console.log("Screen content changed");
+    }
+}
+
+handleScreenChange(isMobile);
+
+isMobile.addEventListener("change", handleScreenChange);

@@ -36,7 +36,7 @@ html, body {
 
     position: relative;
 
-
+    caret-color: transparent;
 }
 
 .right {
@@ -56,6 +56,8 @@ html, body {
     overflow-y: scroll;
 
     font-family: 'Poppins', Sans-serif;
+
+    caret-color: transparent;
 }
 
 .name {
@@ -295,6 +297,10 @@ section {
 
 @media (max-width: 768px) {
 
+  .left {
+    transition: all 0.3s ease-in-out;
+  }
+
   .collapse {
     max-width: 5%;
   }
@@ -309,10 +315,35 @@ section {
 
   .sabari-box {
       display: none;
+      transition: all 0.3s ease-in-out;
+  }
+
+  .expand .sabari-box {
+      display: flex;
+      opacity: 1;
+
+      flex-direction: column;
+      justify-content: flex-end;
+      height: 100%;
+  }
+
+  .sabari-box img {
+      
   }
 
   .lines {
       display: none;
+      transition: all 0.3s ease-in-out;
+  }
+
+  .expand .lines {
+      display: block;
+      opacity: 1;
+  }
+
+  .nav-lines {
+      position: fixed;
+      top: 85%;
   }
 
 }
