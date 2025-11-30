@@ -58,7 +58,7 @@ html, body {
     font-family: 'Poppins', Sans-serif;
 
     caret-color: transparent;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 .name {
