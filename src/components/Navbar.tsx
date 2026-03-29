@@ -20,6 +20,7 @@ const Navbar: React.FC = () => {
     { to: '/experience', label: 'Experience' },
     { to: '/portfolio', label: 'Portfolio' },
     { to: '/blog', label: 'Blog' },
+    { to: '/documents', label: 'Documents' },
     { to: '/contact', label: 'Contact' },
   ];
 
@@ -72,7 +73,29 @@ const Navbar: React.FC = () => {
         .active-link { color: var(--accent-color) !important; border-bottom: 2px solid var(--accent-color); }
         .desktop-links a { color: var(--text-color); font-weight: 500; padding-bottom: 0.25rem; }
         .navbar-actions { display: flex; align-items: center; gap: 1rem; }
-        .theme-toggle { background: none; border: 1px solid var(--border-color); color: var(--text-color); padding: 0.5rem; border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .theme-toggle { 
+          background: none; 
+          border: 1px solid var(--border-color); 
+          color: var(--text-color); 
+          padding: 0.5rem; 
+          border-radius: 4px; 
+          cursor: pointer; 
+          display: flex; 
+          align-items: center; 
+          justify-content: center; 
+          transition: background-color 0.3s ease, border-color 0.3s ease;
+          overflow: hidden;
+        }
+        .theme-toggle:hover {
+          background-color: var(--border-color);
+        }
+        .theme-toggle svg {
+          animation: icon-spin 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        @keyframes icon-spin {
+          from { transform: rotate(-90deg) scale(0); opacity: 0; }
+          to { transform: rotate(0) scale(1); opacity: 1; }
+        }
         .hamburger-btn { display: none; flex-direction: column; justify-content: space-around; width: 2rem; height: 2rem; background: transparent; border: none; cursor: pointer; padding: 0; z-index: 1010; }
         .hamburger-line { width: 2rem; height: 0.2rem; background: var(--text-color); border-radius: 10px; transition: all 0.3s linear; position: relative; transform-origin: 1px; }
         .hamburger-btn.open .hamburger-line:first-child { transform: rotate(45deg); }

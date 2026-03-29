@@ -35,9 +35,9 @@ const Experience: React.FC = () => (
     <div className="section" style={{ marginTop: '3rem' }}>
       <h2 style={{ borderBottom: '1px solid var(--border-color)', paddingBottom: '0.5rem' }}>Volunteering</h2>
       <article style={{ margin: '1.5rem 0' }}>
-        <h3>[Volunteer Role] @ [Organization]</h3>
-        <p><em>[Date Range]</em></p>
-        <p>A brief overview of your contribution and the impact on the organization or community.</p>
+        <h3>Campus Lead @ TinkerHub</h3>
+        <p><em>Jun 2025 — Present</em></p>
+        <p>Leading the RIT Campus Chapter at Government Engineering College, Kottayam. Focusing on fostering a culture of technology and innovation within the student community.</p>
       </article>
     </div>
   </section>
