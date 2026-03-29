@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { GoogleGenerativeAI } from '@google/generative-ai';
+import { Send, Bot, User, Loader2 } from 'lucide-react';
 
 type DocType = 'ALL' | 'CERTIFICATE' | 'IDENTITY';
 
@@ -13,6 +15,62 @@ interface DocumentItem {
 
 const Documents: React.FC = () => {
   const [filter, setFilter] = useState<DocType>('ALL');
+  const [query, setQuery] = useState('');
+  const [response, setResponse] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const chatEndRef = useRef<HTMLDivElement>(null);
+
+  const profileContext = `
+    You are an AI assistant for Sabari Vijayan's portfolio. 
+    Bio: B.Tech Computer Science student at RIT Kottayam (2023-2027). Based in Pathanamthitta, Kerala.
+    Passions: Overanalyzing products, precision in software architecture, Apple-inspired design.
+    Volunteering: Campus Lead at TinkerHub RIT (Jun 2025 - Present).
+    Projects:
+    - SmartPlace: Placement management system (React, Express, Supabase, Redis).
+    - Tinkerfetch: System info tool skin.
+    - KTU Status Tracker: Uptime monitor for university site.
+    - Code-A-Pookalam 2025: Official website for competition.
+    - Christmas Secret Messages: Anonymous messaging platform.
+    - CarTinder: MERN stack car discovery app.
+    - TinkerHub Ghost: Custom CMS theme.
+    - Gemini-CLI-Skills: Repository of CLI skill definitions.
+    Tech Stack: React, Next.js, Node.js, TypeScript, Python, C, Docker, Linux, Git.
+    Principles: SOLID, Clean Architecture, WCAG AAA accessibility.
+    Tone: Professional, precise, minimalist, and helpful.
+  `;
+
+  const handleAsk = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!query.trim()) return;
+
+    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+    if (!apiKey) {
+      setResponse("API Key missing. Please configure VITE_GEMINI_API_KEY in environment variables.");
+      return;
+    }
+
+    setLoading(true);
+    setResponse(null);
+
+    try {
+      const genAI = new GoogleGenerativeAI(apiKey);
+      const model = genAI.getGenerativeModel({ model: "gemini-3-flash-preview" });
+      
+      const prompt = `Context: ${profileContext}\n\nUser Question: ${query}\n\nAnswer concisely and professionally.`;
+      const result = await model.generateContent(prompt);
+      const text = result.response.text();
+      setResponse(text);
+    } catch (error) {
+      console.error("AI Error:", error);
+      setResponse("Error connecting to the AI. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (response) chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [response]);
 
   const docs: DocumentItem[] = [
     {
@@ -44,6 +102,36 @@ const Documents: React.FC = () => {
       <div className="header-meta">
         <span>SABARI VIJAYAN</span>
         <span>VERIFIED CREDENTIALS</span>
+      </div>
+
+      <div className="ai-assistant-section">
+        <div className="ai-card">
+          <div className="ai-header">
+            <Bot size={18} />
+            <span>PORTFOLIO INTELLIGENCE</span>
+          </div>
+          <form onSubmit={handleAsk} className="ai-input-group">
+            <input 
+              type="text" 
+              placeholder="Ask me about Sabari's projects, skills, or experience..."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              disabled={loading}
+            />
+            <button type="submit" disabled={loading || !query.trim()}>
+              {loading ? <Loader2 className="animate-spin" size={18} /> : <Send size={18} />}
+            </button>
+          </form>
+          {response && (
+            <div className="ai-response">
+              <div className="response-header">
+                <Bot size={14} /> <span>RESPONSE</span>
+              </div>
+              <p>{response}</p>
+              <div ref={chatEndRef} />
+            </div>
+          )}
+        </div>
       </div>
 
       <div className="main-grid">
@@ -117,6 +205,91 @@ const Documents: React.FC = () => {
           letter-spacing: 0.05em;
         }
 
+        /* AI Assistant Styling */
+        .ai-assistant-section {
+          margin-bottom: 4rem;
+        }
+        .ai-card {
+          border: 1px solid var(--border-color);
+          padding: 1.5rem;
+          background: var(--nav-bg);
+          border-radius: 4px;
+        }
+        .ai-header {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          font-size: 0.7rem;
+          font-weight: 700;
+          color: var(--accent-color);
+          margin-bottom: 1rem;
+          letter-spacing: 0.1em;
+        }
+        .ai-input-group {
+          display: flex;
+          gap: 1rem;
+        }
+        .ai-input-group input {
+          flex: 1;
+          background: var(--bg-color);
+          border: 1px solid var(--border-color);
+          padding: 0.75rem 1rem;
+          color: var(--text-color);
+          font-family: inherit;
+          font-size: 0.95rem;
+          outline: none;
+        }
+        .ai-input-group input:focus {
+          border-color: var(--accent-color);
+        }
+        .ai-input-group button {
+          background: var(--accent-color);
+          color: white;
+          border: none;
+          padding: 0 1.5rem;
+          cursor: pointer;
+          transition: opacity 0.2s;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .ai-input-group button:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+        .ai-response {
+          margin-top: 1.5rem;
+          padding-top: 1.5rem;
+          border-top: 1px solid var(--border-color);
+          animation: fade-in 0.3s ease;
+        }
+        .response-header {
+          display: flex;
+          align-items: center;
+          gap: 0.4rem;
+          font-size: 0.65rem;
+          opacity: 0.5;
+          margin-bottom: 0.5rem;
+          font-weight: 700;
+        }
+        .ai-response p {
+          font-size: 0.95rem;
+          line-height: 1.6;
+          color: var(--text-color);
+        }
+
+        .animate-spin {
+          animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        @keyframes fade-in {
+          from { opacity: 0; transform: translateY(5px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
         .main-grid {
           display: grid;
           grid-template-columns: 240px 1fr;
@@ -187,6 +360,8 @@ const Documents: React.FC = () => {
           .docs-table td:nth-child(3) { display: none; }
           .header-meta { font-size: 0.65rem; }
           .section-intro h1 { font-size: 2rem; }
+          .ai-input-group { flex-direction: column; }
+          .ai-input-group button { padding: 0.75rem; }
         }
       `}</style>
     </section>
