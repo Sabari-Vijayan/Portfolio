@@ -1,7 +1,48 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Send, Bot, Loader2 } from 'lucide-react';
+
+// Replace with your actual Vercel project URL after deploying
+const API_URL = 'https://your-project-name.vercel.app/api/chat';
 
 const About: React.FC = () => {
+  const [query, setQuery] = useState('');
+  const [response, setResponse] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const chatEndRef = useRef<HTMLDivElement>(null);
+
+  const handleAsk = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!query.trim()) return;
+
+    setLoading(true);
+    setResponse(null);
+
+    try {
+      const res = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query }),
+      });
+
+      if (!res.ok) {
+        throw new Error(`API Error: ${res.statusText}`);
+      }
+
+      const data = await res.json();
+      setResponse(data.text);
+    } catch (error) {
+      console.error("AI Error:", error);
+      setResponse("Error connecting to the AI. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (response) chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [response]);
+
   const techStack = [
     { category: 'FRONTEND', items: 'React, Next.js, TypeScript' },
     { category: 'BACKEND', items: 'Node.js, Express, Python, C' },
@@ -40,6 +81,36 @@ const About: React.FC = () => {
               I deeply admire the elegance with which <strong>Apple</strong> approaches design, 
               and I strive to bring that same level of <strong>precision and perfection</strong> to every piece of software I architect.
             </p>
+          </section>
+
+          <section className="ai-assistant-section">
+            <div className="ai-card">
+              <div className="ai-header">
+                <Bot size={18} />
+                <span>PORTFOLIO INTELLIGENCE</span>
+              </div>
+              <form onSubmit={handleAsk} className="ai-input-group">
+                <input 
+                  type="text" 
+                  placeholder="Ask me about Sabari's projects, skills, or experience..."
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  disabled={loading}
+                />
+                <button type="submit" disabled={loading || !query.trim()}>
+                  {loading ? <Loader2 className="animate-spin" size={18} /> : <Send size={18} />}
+                </button>
+              </form>
+              {response && (
+                <div className="ai-response">
+                  <div className="response-header">
+                    <Bot size={14} /> <span>RESPONSE</span>
+                  </div>
+                  <p>{response}</p>
+                  <div ref={chatEndRef} />
+                </div>
+              )}
+            </div>
           </section>
 
           <section className="data-table">
@@ -85,6 +156,93 @@ const About: React.FC = () => {
           margin-bottom: 3rem;
           opacity: 0.6;
           letter-spacing: 0.05em;
+        }
+
+        /* AI Assistant Styling */
+        .ai-assistant-section {
+          margin-bottom: 2rem;
+          max-width: 650px;
+        }
+        .ai-card {
+          border: 1px solid var(--border-color);
+          padding: 1.5rem;
+          background: var(--nav-bg);
+          border-radius: 4px;
+        }
+        .ai-header {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          font-size: 0.7rem;
+          font-weight: 700;
+          color: var(--accent-color);
+          margin-bottom: 1rem;
+          letter-spacing: 0.1em;
+        }
+        .ai-input-group {
+          display: flex;
+          gap: 1rem;
+        }
+        .ai-input-group input {
+          flex: 1;
+          background: var(--bg-color);
+          border: 1px solid var(--border-color);
+          padding: 0.75rem 1rem;
+          color: var(--text-color);
+          font-family: inherit;
+          font-size: 0.95rem;
+          outline: none;
+        }
+        .ai-input-group input:focus {
+          border-color: var(--accent-color);
+        }
+        .ai-input-group button {
+          background: var(--accent-color);
+          color: white;
+          border: none;
+          padding: 0 1.5rem;
+          cursor: pointer;
+          transition: opacity 0.2s;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .ai-input-group button:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+        .ai-response {
+          margin-top: 1.5rem;
+          padding-top: 1.5rem;
+          border-top: 1px solid var(--border-color);
+          animation: fade-in 0.3s ease;
+        }
+        .response-header {
+          display: flex;
+          align-items: center;
+          gap: 0.4rem;
+          font-size: 0.65rem;
+          opacity: 0.5;
+          margin-bottom: 0.5rem;
+          font-weight: 700;
+        }
+        .ai-response p {
+          font-size: 0.95rem;
+          line-height: 1.6;
+          color: var(--text-color);
+        }
+
+        @keyframes fade-in {
+          from { opacity: 0; transform: translateY(5px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-spin {
+          animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
         }
 
         .main-grid {
@@ -200,6 +358,9 @@ const About: React.FC = () => {
           .manifesto h1 { font-size: 2rem; text-align: center; }
           .manifesto p { text-align: center; margin: 0 auto; }
           .header-meta { font-size: 0.65rem; }
+          .ai-input-group { flex-direction: column; }
+          .ai-input-group button { padding: 0.75rem; }
+          .ai-assistant-section { max-width: 100%; }
         }
       `}</style>
     </section>
