@@ -61,7 +61,7 @@ const About: React.FC = () => {
         <aside className="sidebar">
           <div className="image-frame">
             <img 
-              src="/profile-long.png" 
+              src="profile-long.png" 
               alt="Sabari Vijayan" 
               className="profile-image"
             />
@@ -69,7 +69,7 @@ const About: React.FC = () => {
           <div className="sidebar-links">
             <a href="https://github.com/Sabari-Vijayan" target="_blank" rel="noopener noreferrer">GITHUB</a>
             <a href="https://www.linkedin.com/in/sabari-vijayan-a07107308/" target="_blank" rel="noopener noreferrer">LINKEDIN</a>
-            <a href="/documents/Sabari-Vijayan-Resume.pdf" download>RESUME.PDF</a>
+            <a href="documents/Sabari-Vijayan-Resume.pdf" download>RESUME.PDF</a>
           </div>
         </aside>
 
@@ -125,6 +125,18 @@ const About: React.FC = () => {
                 ))}
               </tbody>
             </table>
+          </section>
+
+          <section className="contributions">
+            <h2 className="section-label">CODE ACTIVITY</h2>
+            <div className="github-chart">
+              <img 
+                src="https://ghchart.rshah.org/40c463/Sabari-Vijayan" 
+                alt="Sabari Vijayan's Github Contributions" 
+                className="chart-img"
+              />
+              <p className="chart-meta">Visualizing the consistency of my architectural commits over the past year.</p>
+            </div>
           </section>
 
           <section className="current-project">
@@ -334,6 +346,27 @@ const About: React.FC = () => {
         .row-data {
           padding: 0.75rem 0;
           font-weight: 500;
+        }
+
+        .github-chart {
+          border: 1px solid var(--border-color);
+          padding: 1.5rem;
+          background: var(--bg-color);
+          border-radius: 4px;
+        }
+        .chart-img {
+          width: 100%;
+          height: auto;
+          filter: grayscale(100%) contrast(1.2);
+          transition: filter 0.3s ease;
+          display: block;
+          margin-bottom: 1rem;
+        }
+        .chart-img:hover { filter: grayscale(0%) contrast(1); }
+        .chart-meta {
+          font-size: 0.8rem;
+          opacity: 0.6;
+          font-style: italic;
         }
 
         .project-brief p {

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Search } from 'lucide-react';
 
 type DocType = 'ALL' | 'CERTIFICATE' | 'IDENTITY';
 
@@ -13,6 +14,7 @@ interface DocumentItem {
 
 const Documents: React.FC = () => {
   const [filter, setFilter] = useState<DocType>('ALL');
+  const [searchQuery, setSearchQuery] = useState('');
 
   const docs: DocumentItem[] = [
     {
@@ -21,7 +23,7 @@ const Documents: React.FC = () => {
       type: 'IDENTITY',
       issuer: 'Self',
       date: '2026.03',
-      path: '/documents/Sabari-Vijayan-Resume.pdf'
+      path: 'documents/Sabari-Vijayan-Resume.pdf'
     },
     {
       id: 2,
@@ -29,13 +31,16 @@ const Documents: React.FC = () => {
       type: 'CERTIFICATE',
       issuer: 'Anthropic',
       date: '2025.10',
-      path: '/documents/certificates/AI-Fluency-Anthropic.pdf'
+      path: 'documents/certificates/AI-Fluency-Anthropic.pdf'
     }
   ];
 
-  const filteredDocs = filter === 'ALL' 
-    ? docs 
-    : docs.filter(doc => doc.type === filter);
+  const filteredDocs = docs.filter(doc => {
+    const matchesFilter = filter === 'ALL' || doc.type === filter;
+    const matchesSearch = doc.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                          doc.issuer.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesFilter && matchesSearch;
+  });
 
   const categories: DocType[] = ['ALL', 'CERTIFICATE', 'IDENTITY'];
 
@@ -44,6 +49,19 @@ const Documents: React.FC = () => {
       <div className="header-meta">
         <span>SABARI VIJAYAN</span>
         <span>VERIFIED CREDENTIALS</span>
+      </div>
+
+      <div className="search-section">
+        <div className="search-wrapper">
+          <Search size={18} className="search-icon" />
+          <input 
+            type="text" 
+            placeholder="Search documents by name or issuer..." 
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="search-input"
+          />
+        </div>
       </div>
 
       <div className="main-grid">
@@ -69,35 +87,41 @@ const Documents: React.FC = () => {
           </div>
 
           <div className="docs-list">
-            <table className="docs-table">
-              <thead>
-                <tr>
-                  <th>DATE</th>
-                  <th>DOCUMENT NAME</th>
-                  <th>ISSUER</th>
-                  <th>ACTION</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredDocs.map((doc) => (
-                  <tr key={doc.id}>
-                    <td className="row-meta">{doc.date}</td>
-                    <td className="row-main">{doc.name}</td>
-                    <td className="row-meta">{doc.issuer}</td>
-                    <td className="row-link">
-                      <a 
-                        href={doc.path} 
-                        download 
-                        className="text-link"
-                        title={`Download ${doc.name}`}
-                      >
-                        ↓ DOWNLOAD PDF
-                      </a>
-                    </td>
+            {filteredDocs.length > 0 ? (
+              <table className="docs-table">
+                <thead>
+                  <tr>
+                    <th>DATE</th>
+                    <th>DOCUMENT NAME</th>
+                    <th>ISSUER</th>
+                    <th>ACTION</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {filteredDocs.map((doc) => (
+                    <tr key={doc.id}>
+                      <td className="row-meta">{doc.date}</td>
+                      <td className="row-main">{doc.name}</td>
+                      <td className="row-meta">{doc.issuer}</td>
+                      <td className="row-link">
+                        <a 
+                          href={doc.path} 
+                          download 
+                          className="text-link"
+                          title={`Download ${doc.name}`}
+                        >
+                          ↓ DOWNLOAD PDF
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            ) : (
+              <div className="no-results">
+                <p>No documents found matching your search.</p>
+              </div>
+            )}
           </div>
         </main>
       </div>
@@ -115,6 +139,37 @@ const Documents: React.FC = () => {
           margin-bottom: 3rem;
           opacity: 0.6;
           letter-spacing: 0.05em;
+        }
+
+        .search-section {
+          margin-bottom: 3rem;
+        }
+        .search-wrapper {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          border: 1px solid var(--border-color);
+          padding: 0.75rem 1.25rem;
+          background: var(--nav-bg);
+          border-radius: 4px;
+          max-width: 600px;
+        }
+        .search-icon {
+          opacity: 0.5;
+          color: var(--text-color);
+        }
+        .search-input {
+          flex: 1;
+          background: transparent;
+          border: none;
+          color: var(--text-color);
+          font-family: inherit;
+          font-size: 1rem;
+          outline: none;
+        }
+        .search-input::placeholder {
+          opacity: 0.5;
+          font-style: italic;
         }
 
         .main-grid {
@@ -170,6 +225,15 @@ const Documents: React.FC = () => {
         .row-meta { font-family: inherit; font-size: 0.8rem; opacity: 0.6; letter-spacing: 0.02em; }
         .row-main { font-weight: 600; font-size: 1rem; }
         
+        .no-results {
+          padding: 3rem 0;
+          text-align: center;
+          opacity: 0.6;
+          font-style: italic;
+          border: 1px dashed var(--border-color);
+          border-radius: 4px;
+        }
+
         .text-link {
           font-family: inherit;
           font-size: 0.8rem;
@@ -187,6 +251,7 @@ const Documents: React.FC = () => {
           .docs-table td:nth-child(3) { display: none; }
           .header-meta { font-size: 0.65rem; }
           .section-intro h1 { font-size: 2rem; }
+          .search-wrapper { max-width: 100%; }
         }
       `}</style>
     </section>
