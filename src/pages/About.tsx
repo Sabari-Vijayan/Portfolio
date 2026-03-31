@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Send, Bot, Loader2 } from 'lucide-react';
 
 // Replace with your actual Vercel project URL after deploying
-const API_URL = 'https://your-project-name.vercel.app/api/chat';
+const API_URL = 'https://portfolio-liard-alpha-anenqdv7wr.vercel.app/api/chat';
 
 const About: React.FC = () => {
   const [query, setQuery] = useState('');

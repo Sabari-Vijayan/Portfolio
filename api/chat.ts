@@ -5,10 +5,19 @@ export const config = {
 };
 
 export default async function handler(req: Request) {
-  // 1. Handle CORS (Allow GitHub Pages to call this API)
-  const allowedOrigin = 'https://sabari-vijayan.github.io';
+  // 1. Handle CORS (Allow GitHub Pages, Vercel, and Localhost)
+  const allowedOrigins = [
+    'https://sabari-vijayan.github.io',
+    'https://portfolio-liard-alpha-anenqdv7wr.vercel.app',
+    'http://localhost:5173', // Default Vite port
+    'http://localhost:3000'
+  ];
+  
+  const origin = req.headers.get('origin') || '';
+  const isAllowed = allowedOrigins.includes(origin);
+
   const headers = {
-    'Access-Control-Allow-Origin': allowedOrigin,
+    'Access-Control-Allow-Origin': isAllowed ? origin : allowedOrigins[0],
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type',
     'Content-Type': 'application/json',
