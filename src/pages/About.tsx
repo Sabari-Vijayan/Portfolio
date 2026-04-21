@@ -1,13 +1,14 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Send, Bot, Loader2 } from 'lucide-react';
 
-// Replace with your actual Vercel project URL after deploying
+// Absolute URL required because frontend is on GitHub Pages and API is on Vercel
 const API_URL = 'https://portfolio-liard-alpha-anenqdv7wr.vercel.app/api/chat';
 
 const About: React.FC = () => {
   const [query, setQuery] = useState('');
   const [response, setResponse] = useState<string | null>(null);
+  const [source, setSource] = useState<'GITHUB' | 'AI' | null>(null);
   const [loading, setLoading] = useState(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
 
@@ -16,7 +17,8 @@ const About: React.FC = () => {
     if (!query.trim()) return;
 
     setLoading(true);
-    setResponse(null);
+    setResponse('');
+    setSource(null);
 
     try {
       const res = await fetch(API_URL, {
@@ -26,11 +28,50 @@ const About: React.FC = () => {
       });
 
       if (!res.ok) {
-        throw new Error(`API Error: ${res.statusText}`);
+        const errorData = await res.json().catch(() => ({}));
+        throw new Error(errorData.details || errorData.error || `API Error: ${res.statusText}`);
       }
 
-      const data = await res.json();
-      setResponse(data.text);
+      if (!res.body) throw new Error("No response body");
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let accumulatedText = '';
+      let buffer = ''; // Buffer for partial chunks
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split('\n');
+        buffer = lines.pop() || '';
+
+        for (const line of lines) {
+          if (!line.trim()) continue;
+          try {
+            const data = JSON.parse(line);
+            if (data.source) {
+              setSource(data.source);
+            }
+            if (data.text) {
+              // Authentic "Token" rhythm: Split into words/spaces to mimic model generation
+              const words = data.text.match(/(\s+|\S+)/g) || [];
+              for (const word of words) {
+                accumulatedText += word;
+                setResponse(accumulatedText);
+                // Faster than character typing, but maintains the "chunk" rhythm
+                await new Promise(resolve => setTimeout(resolve, 25)); 
+              }
+            }
+            if (data.error) {
+              throw new Error(data.error);
+            }
+          } catch (err) {
+            console.error("Parse error:", err, "Line:", line);
+          }
+        }
+      }
     } catch (error) {
       console.error("AI Error:", error);
       setResponse("Error connecting to the AI. Please try again later.");
@@ -38,10 +79,6 @@ const About: React.FC = () => {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    if (response) chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [response]);
 
   const techStack = [
     { category: 'FRONTEND', items: 'React, Next.js, TypeScript' },
@@ -57,23 +94,23 @@ const About: React.FC = () => {
         <span>PATHANAMTHITTA, IN</span>
       </div>
 
-      <div className="main-grid">
-        <aside className="sidebar">
-          <div className="image-frame">
-            <img 
-              src="profile-long.png" 
-              alt="Sabari Vijayan" 
-              className="profile-image"
-            />
-          </div>
-          <div className="sidebar-links">
-            <a href="https://github.com/Sabari-Vijayan" target="_blank" rel="noopener noreferrer">GITHUB</a>
-            <a href="https://www.linkedin.com/in/sabari-vijayan-a07107308/" target="_blank" rel="noopener noreferrer">LINKEDIN</a>
-            <a href="documents/Sabari-Vijayan-Resume.pdf" download>RESUME.PDF</a>
-          </div>
-        </aside>
+      <div className="about-layout">
+        <section className="hero-section">
+          <aside className="sidebar">
+            <div className="image-frame">
+              <img 
+                src="profile-long.png" 
+                alt="Sabari Vijayan" 
+                className="profile-image"
+              />
+            </div>
+            <div className="sidebar-links">
+              <a href="https://github.com/Sabari-Vijayan" target="_blank" rel="noopener noreferrer">GITHUB</a>
+              <a href="https://www.linkedin.com/in/sabari-vijayan-a07107308/" target="_blank" rel="noopener noreferrer">LINKEDIN</a>
+              <a href="documents/Sabari-Vijayan-Resume.pdf" download>RESUME.PDF</a>
+            </div>
+          </aside>
 
-        <main className="content">
           <section className="manifesto">
             <h1>Refining the details that matter.</h1>
             <p>
@@ -82,7 +119,9 @@ const About: React.FC = () => {
               and I strive to bring that same level of <strong>precision and perfection</strong> to every piece of software I architect.
             </p>
           </section>
+        </section>
 
+        <main className="content">
           <section className="ai-assistant-section">
             <div className="ai-card">
               <div className="ai-header">
@@ -105,6 +144,16 @@ const About: React.FC = () => {
                 <div className="ai-response">
                   <div className="response-header">
                     <Bot size={14} /> <span>RESPONSE</span>
+                    {source && (
+                      <div className="source-meta">
+                        <div 
+                          className={`source-indicator ${source.toLowerCase()}`}
+                          onClick={() => alert(`Data source: ${source === 'GITHUB' ? 'Real-time GitHub fetch' : 'AI Context'}`)}
+                        >
+                          <span className="source-tooltip">{source === 'GITHUB' ? 'Live GitHub Data' : 'AI Internal Context'}</span>
+                        </div>
+                      </div>
+                    )}
                   </div>
                   <p>{response}</p>
                   <div ref={chatEndRef} />
@@ -170,10 +219,94 @@ const About: React.FC = () => {
           letter-spacing: 0.05em;
         }
 
+        .about-layout {
+          display: flex;
+          flex-direction: column;
+          gap: 4rem;
+          width: 100%;
+        }
+
+        /* Hero Section (Side-by-Side on Desktop) */
+        .hero-section {
+          display: grid;
+          grid-template-columns: 220px 1fr;
+          gap: 3rem;
+          align-items: start;
+        }
+
+        .sidebar {
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+        }
+        .image-frame {
+          border: 1px solid var(--border-color);
+          padding: 4px;
+          background: var(--bg-color);
+        }
+        .profile-image {
+          width: 100%;
+          height: auto;
+          display: block;
+          filter: grayscale(100%);
+          transition: filter 0.3s ease;
+        }
+        .profile-image:hover { filter: grayscale(0%); }
+        
+        .sidebar-links {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+          font-family: inherit;
+          font-size: 0.85rem;
+          letter-spacing: 0.02em;
+        }
+        .sidebar-links a {
+          color: var(--text-color);
+          text-decoration: none;
+          padding: 0.25rem 0;
+          border-bottom: 1px solid transparent;
+          width: fit-content;
+        }
+        .sidebar-links a:hover {
+          color: var(--accent-color);
+          border-bottom: 1px solid var(--accent-color);
+        }
+
+        .manifesto h1 {
+          font-size: 2.5rem;
+          font-weight: 700;
+          letter-spacing: -0.03em;
+          margin-bottom: 1.5rem;
+          line-height: 1.1;
+        }
+        .manifesto p {
+          font-size: 1.1rem;
+          line-height: 1.6;
+          opacity: 0.9;
+        }
+
+        /* Content Styling (Centered below Hero) */
+        .content { 
+          display: flex; 
+          flex-direction: column; 
+          gap: 4rem; 
+          width: 100%;
+        }
+
+        .section-label {
+          font-family: inherit;
+          font-size: 0.75rem;
+          color: var(--accent-color);
+          margin-bottom: 1rem;
+          letter-spacing: 0.1em;
+          font-weight: 700;
+        }
+
         /* AI Assistant Styling */
         .ai-assistant-section {
-          margin-bottom: 2rem;
-          max-width: 650px;
+          margin-bottom: 0;
+          width: 100%;
         }
         .ai-card {
           border: 1px solid var(--border-color);
@@ -227,7 +360,6 @@ const About: React.FC = () => {
           margin-top: 1.5rem;
           padding-top: 1.5rem;
           border-top: 1px solid var(--border-color);
-          animation: fade-in 0.3s ease;
         }
         .response-header {
           display: flex;
@@ -238,15 +370,62 @@ const About: React.FC = () => {
           margin-bottom: 0.5rem;
           font-weight: 700;
         }
+        .source-meta {
+          display: flex;
+          align-items: center;
+          margin-left: 0.5rem;
+        }
+        .source-indicator {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          cursor: pointer;
+          position: relative;
+          transition: transform 0.2s;
+          animation: pulse 2s infinite;
+        }
+        .source-indicator:hover {
+          transform: scale(1.2);
+        }
+        @keyframes pulse {
+          0% { opacity: 1; }
+          50% { opacity: 0.6; }
+          100% { opacity: 1; }
+        }
+        .source-indicator.github {
+          background-color: #3b82f6;
+          box-shadow: 0 0 10px rgba(59, 130, 246, 0.6);
+        }
+        .source-indicator.ai {
+          background-color: #10b981;
+          box-shadow: 0 0 10px rgba(16, 185, 129, 0.6);
+        }
+        .source-tooltip {
+          visibility: hidden;
+          position: absolute;
+          bottom: 125%;
+          left: 50%;
+          transform: translateX(-50%);
+          background-color: var(--text-color);
+          color: var(--bg-color);
+          text-align: center;
+          padding: 4px 8px;
+          border-radius: 4px;
+          white-space: nowrap;
+          font-size: 0.6rem;
+          opacity: 0;
+          transition: opacity 0.3s;
+          pointer-events: none;
+        }
+        .source-indicator:hover .source-tooltip {
+          visibility: visible;
+          opacity: 1;
+        }
         .ai-response p {
           font-size: 0.95rem;
           line-height: 1.6;
           color: var(--text-color);
-        }
-
-        @keyframes fade-in {
-          from { opacity: 0; transform: translateY(5px); }
-          to { opacity: 1; transform: translateY(0); }
+          white-space: pre-wrap;
         }
 
         .animate-spin {
@@ -255,74 +434,6 @@ const About: React.FC = () => {
         @keyframes spin {
           from { transform: rotate(0deg); }
           to { transform: rotate(360deg); }
-        }
-
-        .main-grid {
-          display: grid;
-          grid-template-columns: 240px 1fr;
-          gap: 4rem;
-        }
-
-        /* Sidebar Styling */
-        .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
-        .image-frame {
-          border: 1px solid var(--border-color);
-          padding: 4px;
-          background: var(--bg-color);
-        }
-        .profile-image {
-          width: 100%;
-          height: auto;
-          display: block;
-          filter: grayscale(100%);
-          transition: filter 0.3s ease;
-        }
-        .profile-image:hover { filter: grayscale(0%); }
-        
-        .sidebar-links {
-          display: flex;
-          flex-direction: column;
-          gap: 0.5rem;
-          font-family: inherit;
-          font-size: 0.85rem;
-          letter-spacing: 0.02em;
-        }
-        .sidebar-links a {
-          color: var(--text-color);
-          text-decoration: none;
-          padding: 0.25rem 0;
-          border-bottom: 1px solid transparent;
-          width: fit-content;
-        }
-        .sidebar-links a:hover {
-          color: var(--accent-color);
-          border-bottom: 1px solid var(--accent-color);
-        }
-
-        /* Content Styling */
-        .content { display: flex; flex-direction: column; gap: 4rem; }
-        
-        .manifesto h1 {
-          font-size: 2.5rem;
-          font-weight: 700;
-          letter-spacing: -0.03em;
-          margin-bottom: 1.5rem;
-          line-height: 1.1;
-        }
-        .manifesto p {
-          font-size: 1.1rem;
-          line-height: 1.6;
-          max-width: 550px;
-          opacity: 0.9;
-        }
-
-        .section-label {
-          font-family: inherit;
-          font-size: 0.75rem;
-          color: var(--accent-color);
-          margin-bottom: 1rem;
-          letter-spacing: 0.1em;
-          font-weight: 700;
         }
 
         /* Table Styling */
@@ -350,19 +461,18 @@ const About: React.FC = () => {
 
         .github-chart {
           border: 1px solid var(--border-color);
-          padding: 1.5rem;
+          padding: 1rem;
           background: var(--bg-color);
           border-radius: 4px;
+          overflow-x: auto;
         }
         .chart-img {
           width: 100%;
+          min-width: 600px;
           height: auto;
-          filter: grayscale(100%) contrast(1.2);
-          transition: filter 0.3s ease;
           display: block;
-          margin-bottom: 1rem;
+          margin-bottom: 0.5rem;
         }
-        .chart-img:hover { filter: grayscale(0%) contrast(1); }
         .chart-meta {
           font-size: 0.8rem;
           opacity: 0.6;
@@ -384,16 +494,27 @@ const About: React.FC = () => {
         .text-link:hover { text-decoration: underline; }
 
         @media (max-width: 850px) {
-          .main-grid { grid-template-columns: 1fr; gap: 3rem; }
-          .sidebar { flex-direction: column; align-items: center; gap: 1.5rem; }
-          .image-frame { width: 220px; }
-          .sidebar-links { align-items: center; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 1.5rem; }
-          .manifesto h1 { font-size: 2rem; text-align: center; }
-          .manifesto p { text-align: center; margin: 0 auto; }
+          .hero-section {
+            grid-template-columns: 1fr;
+            text-align: center;
+            gap: 2rem;
+          }
+          .sidebar {
+            align-items: center;
+          }
+          .image-frame {
+            width: 200px;
+          }
+          .sidebar-links {
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+          }
+          .manifesto h1 { font-size: 2rem; }
           .header-meta { font-size: 0.65rem; }
           .ai-input-group { flex-direction: column; }
           .ai-input-group button { padding: 0.75rem; }
-          .ai-assistant-section { max-width: 100%; }
         }
       `}</style>
     </section>

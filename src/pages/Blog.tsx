@@ -1,4 +1,5 @@
 import React from 'react';
+import { blogList } from '../data/blogs';
 
 const Blog: React.FC = () => (
   <section className="blog-container">
@@ -11,8 +12,8 @@ const Blog: React.FC = () => (
       <aside className="sidebar">
         <h2 className="section-label">LOG ENTRIES</h2>
         <div className="archive-stats">
-          <p>TOTAL POSTS: 00</p>
-          <p>LAST UPDATED: ---</p>
+          <p>TOTAL POSTS: {blogList.length.toString().padStart(2, '0')}</p>
+          <p>PLATFORM: MEDIUM</p>
         </div>
       </aside>
 
@@ -23,9 +24,24 @@ const Blog: React.FC = () => (
         </div>
 
         <div className="post-list">
-          <div className="empty-state" style={{ padding: '2rem 0', opacity: 0.5, fontStyle: 'italic' }}>
-            <p>No entries found. Journaling will commence shortly.</p>
-          </div>
+          {blogList.length > 0 ? (
+            blogList.map((post, idx) => (
+              <article key={idx} className="post-row">
+                <div className="post-meta">
+                  <span className="post-date">[{new Date(post.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }).toUpperCase()}]</span>
+                </div>
+                <div className="post-main">
+                  <h3>{post.title}</h3>
+                  <p>{post.summary}</p>
+                  <a href={post.link} className="text-link" target="_blank" rel="noopener noreferrer">→ READ ARTICLE</a>
+                </div>
+              </article>
+            ))
+          ) : (
+            <div className="empty-state" style={{ padding: '2rem 0', opacity: 0.5, fontStyle: 'italic' }}>
+              <p>No entries found. Journaling will commence shortly.</p>
+            </div>
+          )}
         </div>
       </main>
     </div>

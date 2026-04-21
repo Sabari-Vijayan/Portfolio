@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { projectList } from '../data/projects';
 
 type Category = 'ALL' | 'PROJECT' | 'DESIGN' | 'PAPER';
 
@@ -14,63 +15,22 @@ interface PortfolioItem {
 const Portfolio: React.FC = () => {
   const [filter, setFilter] = useState<Category>('ALL');
 
-  const items: PortfolioItem[] = [
+  // Manual items for things that aren't on GitHub or need specific curation
+  const manualItems: PortfolioItem[] = [
     {
-      id: 1,
-      title: 'SmartPlace',
-      category: 'PROJECT',
-      description: 'A self-hostable placement management system for colleges. Built with React/Vite, Express, Supabase, and Redis.',
-      link: 'https://github.com/Sabari-Vijayan/SmartPlace',
-    },
-    {
-      id: 2,
-      title: 'Tinkerfetch',
-      category: 'PROJECT',
-      description: 'A custom system info tool (Fastfetch skin) with a dedicated mode for tracking community events.',
-      link: 'https://github.com/Sabari-Vijayan/tinkerfetch.git',
-    },
-    {
-      id: 3,
-      title: 'KTU Status Tracker',
-      category: 'PROJECT',
-      description: 'Uptime monitor for the KTU website built using Upptime and GitHub Actions.',
-      link: 'https://status.app.ktu.in',
-    },
-    {
-      id: 4,
-      title: 'Code-A-Pookalam 2025',
-      category: 'PROJECT',
-      description: 'Official website for the TinkerHub RIT competition.',
-      link: 'https://github.com/Sabari-Vijayan/CODE-A-POOKALAM-2025-COMPETITION.git',
-    },
-    {
-      id: 5,
-      title: 'Christmas Secret Messages',
-      category: 'PROJECT',
-      description: 'An anonymous messaging platform where gifts (messages) are unlocked strictly on Christmas Day. (Supabase/React).',
-      link: 'https://github.com/Sabari-Vijayan/christmas.git',
-    },
-    {
-      id: 6,
-      title: 'CarTinder',
-      category: 'PROJECT',
-      description: 'A MERN stack application applying the "swipe" discovery mechanic to car listings.',
-      link: 'https://github.com/Sabari-Vijayan/cartinder.git',
-    },
-    {
-      id: 7,
+      id: 1001,
       title: 'TinkerHub Ghost',
       category: 'DESIGN',
       description: 'Custom Ghost CMS theme developed for TinkerHub RIT during the Ghosted Hackathon.',
       link: 'https://github.com/Sabari-Vijayan/tinkerhub-ghost.git',
     },
-    {
-      id: 8,
-      title: 'Gemini-CLI-Skills',
-      category: 'PROJECT',
-      description: 'A specialized repository of .md skill definitions to enhance Gemini CLI workflows.',
-      link: 'https://github.com/Sabari-Vijayan/Gemini-CLI-Skills.git',
-    },
+  ];
+
+  // Merge automated GitHub projects with manual items
+  // We filter out any automated project that is already in manualItems to avoid duplicates
+  const items: PortfolioItem[] = [
+    ...manualItems,
+    ...(projectList as PortfolioItem[]).filter(p => !manualItems.some(m => m.title.toLowerCase() === p.title.toLowerCase()))
   ];
 
   const filteredItems = filter === 'ALL' 
