@@ -1,73 +1,37 @@
-# React + TypeScript + Vite
+# Sabari Vijayan | Professional Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A minimal, architectural, and highly automated portfolio showcasing my journey as a Computer Science student at RIT Kottayam. This project focuses on precision, clean code, and a seamless user experience.
 
-Currently, two official plugins are available:
+## 🚀 Key Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### 🤖 Portfolio Intelligence (AI Orchestrator)
+The home page features a custom AI assistant that acts as a professional representative.
+- **Dynamic Context**: It retrieves real-time data from GitHub to answer questions about specific repositories, tech stacks, and project status.
+- **Natural Conversation**: Designed to provide insightful, conversational responses rather than simple redirects.
+- **Architecture**: Powered by a dual-LLM (Router-Generator) pattern hosted on Vercel.
 
-## React Compiler
+### 📄 Intelligent Document Hub
+A dedicated space for academic and professional credentials.
+- **Filtered Search**: Easily locate resumes, certificates (like AI Fluency), and papers using a real-time search interface.
+- **Categorized Storage**: Organized for quick access to high-signal professional documents.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 🔄 Fully Automated Content Synchronization
+This portfolio is "alive"—it updates itself without manual intervention.
+- **GitHub Projects**: Automatically fetches your latest repositories, filters them by topic, and sorts them by star count.
+- **Medium Blogs**: Syncs latest articles, including featured images and clean text snippets, directly from your Medium RSS feed.
+- **Workflows**: Powered by GitHub Actions to ensure the data is always fresh.
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
+- **Frontend**: React 19, TypeScript, Vite
+- **Routing**: React Router (HashRouter for GitHub Pages compatibility)
+- **Styling**: Modern CSS with a focus on WCAG 2.0 AAA accessibility standards.
+- **Backend/API**: Vercel Serverless Functions (Node.js)
+- **AI**: Google Gemini Pro & Flash models
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 📖 Learn More & Automate Your Own
+I have documented the automation strategy used in this project so others can implement similar systems.
+- [GitHub Actions Automation Guide](./AUTOMATION_GUIDE.md) - Learn how to automate your own project updates.
+- [AI Orchestrator Architecture](./ORCHESTRATOR_ARCH.md) - Deep dive into how the AI assistant works.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+Built with 💙 by Sabari Vijayan.
