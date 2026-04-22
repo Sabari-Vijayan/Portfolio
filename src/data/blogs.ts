@@ -6,7 +6,8 @@ export const blogList = [
     "title": "Short Form content is killing you?",
     "link": "https://medium.com/@vijayansabari06/short-form-content-is-killing-you-5b63cef9fa60?source=rss-2c891f151b3f------2",
     "date": "Wed, 15 Apr 2026 08:07:50 GMT",
-    "summary": "No snippet available."
+    "summary": "Short form content was revolutionized by TikTok in the 2020s during the COVID era. Till then, short form content usually used to mean 10-minute YouTube videos. TikTok came and made it the standard for...",
+    "image": "https://cdn-images-1.medium.com/max/1024/1*VyAxHkc_aBVtAp8St3TsyA.jpeg"
   }
 ];
 
@@ -16,7 +17,7 @@ export const blogsData = `
 ## Short Form content is killing you?
 - Published: Wed, 15 Apr 2026 08:07:50 GMT
 - Link: https://medium.com/@vijayansabari06/short-form-content-is-killing-you-5b63cef9fa60?source=rss-2c891f151b3f------2
-- Summary: No snippet available.
+- Summary: Short form content was revolutionized by TikTok in the 2020s during the COVID era. Till then, short form content usually used to mean 10-minute YouTube videos. TikTok came and made it the standard for...
 
 
 Check out my full writing at [Medium](https://medium.com/@vijayansabari06).

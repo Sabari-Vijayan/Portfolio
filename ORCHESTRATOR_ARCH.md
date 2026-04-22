@@ -14,29 +14,30 @@ The system uses a **Router-Generator** pattern to provide accurate, context-awar
 - **Output Schema:**
   ```json
   {
-    "needs": ["bio", "experience", "projects"], 
-    "githubFetch": "repo_name_or_null"
+    "needs": ["bio", "experience", "projects", "blogs"], 
+    "githubFetch": ["repo1", "repo2"]
   }
   ```
 
 ### Step 2: Data Aggregation (Context Building)
 The system dynamically builds the AI's "short-term memory" based on the Router's decision:
-- **Static Contexts:** Loads `bio.ts`, `experience.ts`, or `projects.ts` as requested.
-- **Real-time Fetch:** If a specific repo is identified (e.g., "SmartPlace"), the system calls the GitHub API to get current stars, forks, and activity.
+- **Static Contexts:** Loads `bio.ts`, `experience.ts`, `projects.ts`, or `blogs.ts` as requested.
+- **Real-time Fetch:** If repositories are identified (e.g., "HSAV", "TinyGoose"), the system concurrently calls the GitHub API for each to get current stars, forks, and activity.
 
 ### Step 3: The Generator (Response Generation)
 - **Model:** `gemini-2.5-flash-lite` (Streaming Mode)
 - **Input:** Aggregated context + User query.
-- **Task:** Formulate a professional response based *strictly* on the provided data.
+- **Task:** Formulate a professional, friendly, and conversational response based *strictly* on the provided data. It avoids blunt redirections and weaves links naturally into the conversation.
 
 ## 3. Comparison with Legacy System
 
-| Feature | Legacy (Regex) | Orchestrator (Dual-LLM) |
+| Feature | Legacy (Regex) | Orchestrator (Dual-LLM v2) |
 | :--- | :--- | :--- |
 | **Routing** | Brittle keyword matching | Semantic intent understanding |
 | **Accuracy** | Misses synonyms/complex intent | High; understands context |
-| **Maintenance** | Manual regex updates needed | Just update the Router's prompt |
-| **Data Fetch** | Scans all repos for name match | Specifically targets requested repo |
+| **Data Fetch** | Scans all repos for name match | Specifically targets multiple requested repos concurrently |
+| **Tone** | Robotic / Blunt | Conversational & Friendly |
+| **Redirection** | Hardcoded page links | Context-aware, natural mentions |
 
 ## 4. Maintenance
 To add a new data source (e.g., "Publications"):

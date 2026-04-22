@@ -25,10 +25,25 @@ async function syncBlogs() {
     let blogList = [];
 
     filteredPosts.forEach(post => {
+      // Extract featured image from content:encoded
+      const content = post['content:encoded'] || '';
+      const imgMatch = content.match(/<img[^>]+src="([^">]+)"/);
+      const featuredImage = imgMatch ? imgMatch[1] : null;
+
       // Clean up snippet (remove HTML and limit length)
-      const snippet = post.contentSnippet 
-        ? post.contentSnippet.substring(0, 200).replace(/\n/g, ' ') + '...' 
-        : 'No snippet available.';
+      let snippet = post.contentSnippet || '';
+      if (!snippet && content) {
+        // Simple HTML tag removal for a backup snippet
+        snippet = content
+          .replace(/<[^>]+>/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim()
+          .substring(0, 200) + '...';
+      } else if (snippet) {
+        snippet = snippet.substring(0, 200).replace(/\n/g, ' ') + '...';
+      } else {
+        snippet = 'No snippet available.';
+      }
 
       blogsMarkdown += `## ${post.title}\n`;
       blogsMarkdown += `- Published: ${post.pubDate}\n`;
@@ -39,7 +54,8 @@ async function syncBlogs() {
         title: post.title,
         link: post.link,
         date: post.pubDate,
-        summary: snippet
+        summary: snippet,
+        image: featuredImage
       });
     });
 

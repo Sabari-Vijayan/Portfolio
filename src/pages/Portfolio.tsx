@@ -10,6 +10,7 @@ interface PortfolioItem {
   description: string;
   link: string;
   date?: string;
+  stars?: number;
 }
 
 const Portfolio: React.FC = () => {
@@ -75,6 +76,9 @@ const Portfolio: React.FC = () => {
                 <div className="project-meta">
                   <span className="project-category">{item.category}</span>
                   {item.date && <span className="project-date">[{item.date}]</span>}
+                  {item.stars !== undefined && item.stars > 0 && (
+                    <span className="project-stars">★ {item.stars}</span>
+                  )}
                 </div>
                 <div className="project-main">
                   <h3>{item.title}</h3>
@@ -159,6 +163,12 @@ const Portfolio: React.FC = () => {
           opacity: 0.6;
           padding-top: 0.5rem;
           letter-spacing: 0.02em;
+        }
+
+        .project-stars {
+          color: var(--accent-color);
+          font-weight: 700;
+          opacity: 1;
         }
 
         .project-main h3 { font-size: 1.25rem; margin-bottom: 0.5rem; font-weight: 700; }

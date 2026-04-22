@@ -503,7 +503,8 @@ const About: React.FC = () => {
             align-items: center;
           }
           .image-frame {
-            width: 200px;
+            width: 100%;
+            max-width: 320px;
           }
           .sidebar-links {
             flex-direction: row;

@@ -2,94 +2,121 @@
 // DO NOT EDIT MANUALLY.
 
 export const repoMapping: Record<string, string> = {
+  "tinkerfetch": "Sabari-Vijayan/tinkerfetch",
+  "rit_tracker": "Sabari-Vijayan/RIT_TRACKER",
+  "code-a-pooakalam-25": "Sabari-Vijayan/code-a-pooakalam-25",
   "umang-harmony-welfare-society-theme": "Sabari-Vijayan/Umang-Harmony-Welfare-Society-Theme",
-  "skills-communicate-using-markdown": "Sabari-Vijayan/skills-communicate-using-markdown",
-  "hsav": "Sabari-Vijayan/HSAV",
-  "dotfiles": "Sabari-Vijayan/dotfiles",
-  "mood_music": "Sabari-Vijayan/mood_music",
-  "tinygoose": "Sabari-Vijayan/TinyGoose",
-  "nointernetchallenge": "Sabari-Vijayan/NoInternetChallenge",
-  "basicjava": "Sabari-Vijayan/BasicJava",
-  "basicc": "Sabari-Vijayan/BasicC"
+  "neurobots-hackathon-2026": "Sabari-Vijayan/neurobots-hackathon-2026",
+  "cartinder": "Sabari-Vijayan/cartinder",
+  "voiceform": "Sabari-Vijayan/VoiceForm",
+  "dynamic-pricing-ui": "Sabari-Vijayan/Dynamic-Pricing-UI",
+  "portfolio": "Sabari-Vijayan/Portfolio"
 };
 
 export const projectList = [
   {
     "id": 1,
+    "title": "tinkerfetch",
+    "category": "PROJECT",
+    "description": "Tinkerfetch is a terminal-based \"TinkerHub\" themed system information tool. It's a custom-designed \"skin\" for the Fastfetch engine, featuring a dedicated mode to track upcoming community events.",
+    "link": "https://github.com/Sabari-Vijayan/tinkerfetch",
+    "date": "2026",
+    "stars": 17
+  },
+  {
+    "id": 2,
+    "title": "RIT_TRACKER",
+    "category": "PROJECT",
+    "description": "RIT Tracker is a web-based navigation tool designed to help students, visitors, and faculty easily locate buildings, classrooms, and facilities within our campus. It features an interactive 3D AR view, allowing users to explore campus buildings in detail.",
+    "link": "https://github.com/Sabari-Vijayan/RIT_TRACKER",
+    "date": "2026",
+    "stars": 2
+  },
+  {
+    "id": 3,
+    "title": "code-a-pooakalam-25",
+    "category": "PROJECT",
+    "description": "Official website for code-a-pookalam 2025 by TinkerHub RIT",
+    "link": "https://github.com/Sabari-Vijayan/code-a-pooakalam-25",
+    "date": "2026",
+    "stars": 2
+  },
+  {
+    "id": 4,
     "title": "Umang-Harmony-Welfare-Society-Theme",
     "category": "PROJECT",
     "description": "Official website for Umang Harmony Welfare Society created using Ghost CMS",
     "link": "https://github.com/Sabari-Vijayan/Umang-Harmony-Welfare-Society-Theme",
-    "date": "2026"
-  },
-  {
-    "id": 2,
-    "title": "skills-communicate-using-markdown",
-    "category": "PROJECT",
-    "description": "Exercise: Communicate using Markdown",
-    "link": "https://github.com/Sabari-Vijayan/skills-communicate-using-markdown",
-    "date": "2026"
-  },
-  {
-    "id": 3,
-    "title": "HSAV",
-    "category": "PROJECT",
-    "description": "Project V-Tile is a high-performance, open-source library of GEMM (General Matrix-Matrix Multiplication) kernels specifically optimized for the RISC-V Integrated Matrix Extension (IME) v0.6.",
-    "link": "https://github.com/Sabari-Vijayan/HSAV",
-    "date": "2026"
-  },
-  {
-    "id": 4,
-    "title": "dotfiles",
-    "category": "PROJECT",
-    "description": "These files include of the config files of my linux ricing setup. They mainky include the hyprland setup, nvim setup, and waybar setup etc excluding others.",
-    "link": "https://github.com/Sabari-Vijayan/dotfiles",
-    "date": "2025"
+    "date": "2026",
+    "stars": 2
   },
   {
     "id": 5,
-    "title": "mood_music",
+    "title": "neurobots-hackathon-2026",
     "category": "PROJECT",
-    "description": "The project I made for a vibe coding themed hackathon in which some music is recommended to you based on your facial emotions",
-    "link": "https://github.com/Sabari-Vijayan/mood_music",
-    "date": "2025"
+    "description": "An AI-powered system to detect cheating behavior in online exams using Isolation Forest algorithm.",
+    "link": "https://github.com/Sabari-Vijayan/neurobots-hackathon-2026",
+    "date": "2026",
+    "stars": 0
   },
   {
     "id": 6,
-    "title": "TinyGoose",
+    "title": "cartinder",
     "category": "PROJECT",
-    "description": "An Open source app for compressing, and resiving you images.",
-    "link": "https://github.com/Sabari-Vijayan/TinyGoose",
-    "date": "2025"
+    "description": "CarTinder is a modern, full-stack car rental platform with a \"Tinder-style\" swiping experience. Users can swipe through available cars, like their favorites, chat with dealers, and book rides—all in a sleek, responsive interface.",
+    "link": "https://github.com/Sabari-Vijayan/cartinder",
+    "date": "2026",
+    "stars": 0
   },
   {
     "id": 7,
-    "title": "NoInternetChallenge",
+    "title": "VoiceForm",
     "category": "PROJECT",
-    "description": "The project I made for my Tinkerhub-No Internet Challenge.",
-    "link": "https://github.com/Sabari-Vijayan/NoInternetChallenge",
-    "date": "2025"
+    "description": "A multilingual voice interface that uses LLMs to conduct natural interviews and transform raw speech into structured, actionable data.",
+    "link": "https://github.com/Sabari-Vijayan/VoiceForm",
+    "date": "2026",
+    "stars": 0
   },
   {
     "id": 8,
-    "title": "BasicJava",
+    "title": "Dynamic-Pricing-UI",
     "category": "PROJECT",
-    "description": "Very basic level java programs",
-    "link": "https://github.com/Sabari-Vijayan/BasicJava",
-    "date": "2024"
+    "description": "A dynamic pricing interface built with Angular and Signals to efficiently parse and display complex, nested JSON data.",
+    "link": "https://github.com/Sabari-Vijayan/Dynamic-Pricing-UI",
+    "date": "2026",
+    "stars": 0
   },
   {
     "id": 9,
-    "title": "BasicC",
+    "title": "Portfolio",
     "category": "PROJECT",
-    "description": "Basic C programs :",
-    "link": "https://github.com/Sabari-Vijayan/BasicC",
-    "date": "2024"
+    "description": "A personal showcase built with React, integrated with an AI assistant to answer all your questions about my work instantly.",
+    "link": "https://github.com/Sabari-Vijayan/Portfolio",
+    "date": "2026",
+    "stars": 0
   }
 ];
 
 export const projectsData = `
 # SABARI VIJAYAN - AUTOMATED PROJECT INDEX
+
+## tinkerfetch
+- Description: Tinkerfetch is a terminal-based "TinkerHub" themed system information tool. It's a custom-designed "skin" for the Fastfetch engine, featuring a dedicated mode to track upcoming community events.
+- Primary Language: Shell
+- Stars: 17 | Forks: 0
+- URL: https://github.com/Sabari-Vijayan/tinkerfetch
+
+## RIT_TRACKER
+- Description: RIT Tracker is a web-based navigation tool designed to help students, visitors, and faculty easily locate buildings, classrooms, and facilities within our campus. It features an interactive 3D AR view, allowing users to explore campus buildings in detail.
+- Primary Language: HTML
+- Stars: 2 | Forks: 3
+- URL: https://github.com/Sabari-Vijayan/RIT_TRACKER
+
+## code-a-pooakalam-25
+- Description: Official website for code-a-pookalam 2025 by TinkerHub RIT
+- Primary Language: HTML
+- Stars: 2 | Forks: 1
+- URL: https://github.com/Sabari-Vijayan/code-a-pooakalam-25
 
 ## Umang-Harmony-Welfare-Society-Theme
 - Description: Official website for Umang Harmony Welfare Society created using Ghost CMS
@@ -97,53 +124,37 @@ export const projectsData = `
 - Stars: 2 | Forks: 2
 - URL: https://github.com/Sabari-Vijayan/Umang-Harmony-Welfare-Society-Theme
 
-## skills-communicate-using-markdown
-- Description: Exercise: Communicate using Markdown
-- Primary Language: Mixed
-- Stars: 0 | Forks: 0
-- URL: https://github.com/Sabari-Vijayan/skills-communicate-using-markdown
+## neurobots-hackathon-2026
+- Description: An AI-powered system to detect cheating behavior in online exams using Isolation Forest algorithm.
+- Primary Language: JavaScript
+- Stars: 0 | Forks: 3
+- URL: https://github.com/Sabari-Vijayan/neurobots-hackathon-2026
 
-## HSAV
-- Description: Project V-Tile is a high-performance, open-source library of GEMM (General Matrix-Matrix Multiplication) kernels specifically optimized for the RISC-V Integrated Matrix Extension (IME) v0.6.
-- Primary Language: Mixed
+## cartinder
+- Description: CarTinder is a modern, full-stack car rental platform with a "Tinder-style" swiping experience. Users can swipe through available cars, like their favorites, chat with dealers, and book rides—all in a sleek, responsive interface.
+- Primary Language: TypeScript
 - Stars: 0 | Forks: 0
-- URL: https://github.com/Sabari-Vijayan/HSAV
+- URL: https://github.com/Sabari-Vijayan/cartinder
+- Live Site: https://cartinder-dun.vercel.app
 
-## dotfiles
-- Description: These files include of the config files of my linux ricing setup. They mainky include the hyprland setup, nvim setup, and waybar setup etc excluding others.
-- Primary Language: Mixed
+## VoiceForm
+- Description: A multilingual voice interface that uses LLMs to conduct natural interviews and transform raw speech into structured, actionable data.
+- Primary Language: JavaScript
 - Stars: 0 | Forks: 0
-- URL: https://github.com/Sabari-Vijayan/dotfiles
+- URL: https://github.com/Sabari-Vijayan/VoiceForm
 
-## mood_music
-- Description: The project I made for a vibe coding themed hackathon in which some music is recommended to you based on your facial emotions
+## Dynamic-Pricing-UI
+- Description: A dynamic pricing interface built with Angular and Signals to efficiently parse and display complex, nested JSON data.
 - Primary Language: HTML
 - Stars: 0 | Forks: 0
-- URL: https://github.com/Sabari-Vijayan/mood_music
+- URL: https://github.com/Sabari-Vijayan/Dynamic-Pricing-UI
 
-## TinyGoose
-- Description: An Open source app for compressing, and resiving you images.
-- Primary Language: CSS
+## Portfolio
+- Description: A personal showcase built with React, integrated with an AI assistant to answer all your questions about my work instantly.
+- Primary Language: TypeScript
 - Stars: 0 | Forks: 0
-- URL: https://github.com/Sabari-Vijayan/TinyGoose
-
-## NoInternetChallenge
-- Description: The project I made for my Tinkerhub-No Internet Challenge.
-- Primary Language: Mixed
-- Stars: 0 | Forks: 0
-- URL: https://github.com/Sabari-Vijayan/NoInternetChallenge
-
-## BasicJava
-- Description: Very basic level java programs
-- Primary Language: Java
-- Stars: 0 | Forks: 0
-- URL: https://github.com/Sabari-Vijayan/BasicJava
-
-## BasicC
-- Description: Basic C programs :
-- Primary Language: C
-- Stars: 0 | Forks: 0
-- URL: https://github.com/Sabari-Vijayan/BasicC
+- URL: https://github.com/Sabari-Vijayan/Portfolio
+- Live Site: https://portfolio-liard-alpha-anenqdv7wr.vercel.app
 
 
 Users can browse all projects on the [Portfolio Hub](/portfolio).

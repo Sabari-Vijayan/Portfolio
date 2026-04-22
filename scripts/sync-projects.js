@@ -12,17 +12,27 @@ async function sync() {
     if (!response.ok) throw new Error(`GitHub API error: ${response.statusText}`);
     
     const repos = await response.json();
+    console.log(`Fetched ${repos.length} total repositories.`);
     
-    // Filter out forks and keep only repos with descriptions (or whatever filter you like)
-    const featuredRepos = repos.filter(repo => !repo.fork && repo.description);
+    // Filter by 'project' topic
+    const TARGET_TOPIC = 'project';
+    const featuredRepos = repos
+      .filter(repo => {
+        const topics = repo.topics || [];
+        return topics.includes(TARGET_TOPIC.toLowerCase());
+      })
+      .sort((a, b) => b.stargazers_count - a.stargazers_count);
+
+    console.log(`Filtered and sorted ${featuredRepos.length} projects matching topic "${TARGET_TOPIC}".`);
 
     let projectsMarkdown = `# SABARI VIJAYAN - AUTOMATED PROJECT INDEX\n\n`;
     let repoMapping = {};
     let projectList = [];
 
     featuredRepos.forEach((repo, index) => {
+      const description = repo.description || 'No description provided.';
       projectsMarkdown += `## ${repo.name}\n`;
-      projectsMarkdown += `- Description: ${repo.description}\n`;
+      projectsMarkdown += `- Description: ${description}\n`;
       projectsMarkdown += `- Primary Language: ${repo.language || 'Mixed'}\n`;
       projectsMarkdown += `- Stars: ${repo.stargazers_count} | Forks: ${repo.forks_count}\n`;
       projectsMarkdown += `- URL: ${repo.html_url}\n`;
@@ -35,9 +45,10 @@ async function sync() {
         id: index + 1,
         title: repo.name,
         category: 'PROJECT',
-        description: repo.description,
+        description: description,
         link: repo.html_url,
-        date: new Date(repo.updated_at).getFullYear().toString()
+        date: new Date(repo.updated_at).getFullYear().toString(),
+        stars: repo.stargazers_count
       });
     });
 

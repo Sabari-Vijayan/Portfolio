@@ -2,5 +2,4 @@
 User-agent: *
 Allow: /
 
-# Sitemaps (uncomment and update if you add one later)
-# Sitemap: https://yourdomain.com/sitemap.xml
+Sitemap: https://Sabari-Vijayan.github.io/Portfolio/sitemap.xml

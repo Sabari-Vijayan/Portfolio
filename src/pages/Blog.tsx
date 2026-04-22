@@ -1,6 +1,14 @@
 import React from 'react';
 import { blogList } from '../data/blogs';
 
+interface BlogItem {
+  title: string;
+  link: string;
+  date: string;
+  summary: string;
+  image?: string | null;
+}
+
 const Blog: React.FC = () => (
   <section className="blog-container">
     <div className="header-meta">
@@ -25,12 +33,17 @@ const Blog: React.FC = () => (
 
         <div className="post-list">
           {blogList.length > 0 ? (
-            blogList.map((post, idx) => (
+            (blogList as BlogItem[]).map((post, idx) => (
               <article key={idx} className="post-row">
                 <div className="post-meta">
                   <span className="post-date">[{new Date(post.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }).toUpperCase()}]</span>
                 </div>
                 <div className="post-main">
+                  {post.image && (
+                    <div className="post-featured-image">
+                      <img src={post.image} alt={post.title} />
+                    </div>
+                  )}
                   <h3>{post.title}</h3>
                   <p>{post.summary}</p>
                   <a href={post.link} className="text-link" target="_blank" rel="noopener noreferrer">→ READ ARTICLE</a>
@@ -113,6 +126,25 @@ const Blog: React.FC = () => (
 
       .post-main h3 { font-size: 1.25rem; margin-bottom: 0.5rem; font-weight: 700; }
       .post-main p { font-size: 1rem; opacity: 0.8; margin-bottom: 1rem; line-height: 1.5; }
+
+      .post-featured-image {
+        width: 100%;
+        max-height: 300px;
+        overflow: hidden;
+        margin-bottom: 1.5rem;
+        border-radius: 4px;
+        background: var(--border-color);
+      }
+      .post-featured-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.9;
+        transition: opacity 0.3s ease;
+      }
+      .post-featured-image:hover img {
+        opacity: 1;
+      }
 
       .text-link {
         font-family: inherit;
