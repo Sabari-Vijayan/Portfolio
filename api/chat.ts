@@ -102,7 +102,7 @@ export default async function handler(req: Request) {
       Respond with a JSON object:
       {
         "needs": ["bio", "experience", "projects", "blogs"], // Array of strings
-        "githubFetch": "repo_name_or_null" // String or null
+        "githubFetch": ["repo_name1", "repo_name2"] // Array of strings, or [] if none
       }
 
       Query: "${query}"
@@ -123,30 +123,42 @@ export default async function handler(req: Request) {
     if (!relevantContext) relevantContext = bioData;
 
     let githubDetails = "";
-    if (routerDecision.githubFetch && repoMapping[routerDecision.githubFetch.toLowerCase()]) {
-      const info = await getGithubInfo(routerDecision.githubFetch);
-      if (!info.error) {
-        githubDetails = `\nREAL-TIME GITHUB DATA FOR ${routerDecision.githubFetch.toUpperCase()}:\n${JSON.stringify(info, null, 2)}`;
-      }
+    if (Array.isArray(routerDecision.githubFetch) && routerDecision.githubFetch.length > 0) {
+      const validRepos = routerDecision.githubFetch.filter((repoName: string) => repoMapping[repoName.toLowerCase()]);
+      const fetchPromises = validRepos.map((repoName: string) => getGithubInfo(repoName));
+      
+      const results = await Promise.all(fetchPromises);
+      results.forEach((info, idx) => {
+        if (info && !info.error) {
+          const repoName = validRepos[idx].toUpperCase();
+          githubDetails += `\nREAL-TIME GITHUB DATA FOR ${repoName}:\n${JSON.stringify(info, null, 2)}\n`;
+        }
+      });
     }
 
     const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
     
     const systemPrompt = `
       You are the professional digital representative for Sabari Vijayan.
+      Your tone should be friendly, conversational, and highly helpful, while maintaining professional integrity.
       
-      STRICT SCOPE BARRIER:
-      - ONLY discuss Sabari's skills, experience, projects, and background. Refuse all other topics.
+      CONVERSATIONAL GUIDELINES:
+      - Answer questions thoroughly and naturally. Do not be blunt or overly brief.
+      - If relevant, naturally weave in a mention that the user can find more comprehensive details in the [/portfolio] or [/experience] sections.
+      - Prioritize providing a complete and satisfying answer first rather than just acting as a directory.
+      
+      SCOPE & BOUNDARIES:
+      - Your primary expertise is Sabari's skills, experience, projects, and background. 
+      - If asked about non-portfolio topics (e.g., weather, generic advice, unrelated news), politely decline by gently steering the conversation back to Sabari's work and professional journey.
       
       KNOWLEDGE CONTEXT:
       ${relevantContext}
       ${githubDetails}
 
       INSTRUCTIONS:
-      1. Use the knowledge context (including real-time GitHub data if present) to answer accurately.
-      2. If real-time data is available, cite the stars/updates to show you are "live".
-      3. Point users to [/experience] or [/portfolio] for more details.
-      4. Keep answers high-signal and professional.
+      1. Use the knowledge context (including any real-time GitHub data provided) to formulate accurate responses.
+      2. If real-time data is available, mention it (e.g., "According to live data, this repo has X stars") to highlight your live connectivity.
+      3. Be descriptive. If asked about a project, explain its "why" and "how" based on the available data.
     `;
 
     const source = githubDetails ? "GITHUB" : "AI";
