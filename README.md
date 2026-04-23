@@ -21,6 +21,14 @@ This portfolio is "alive"—it updates itself without manual intervention.
 - **Medium Blogs**: Syncs latest articles, including featured images and clean text snippets, directly from your Medium RSS feed.
 - **Workflows**: Powered by GitHub Actions to ensure the data is always fresh.
 
+## 🏗️ Architecture & Philosophy
+
+This website is built as a **Hybrid Jamstack (Living Static Site)**. It exists in the sweet spot between a traditional static site and a fully dynamic web application.
+
+- **Static Shell, Dynamic Heart**: The layout and portfolio are served as pre-built, high-performance static files (via GitHub Pages/Vercel). However, it uses **GitHub Actions** as a "headless CMS" to automatically pull fresh data from Medium and GitHub, "baking" it into the site during build time.
+- **Real-Time Edge Layer**: The AI agent (`api/chat.ts`) provides a fully dynamic layer. Running as a **Vercel Edge Function**, it fetches real-time repository metadata (stars, forks, last-updated) on-the-fly, ensuring the conversation is always grounded in live data.
+- **The "Automated Jamstack"**: By combining Static Site Generation (SSG) with an automated data pipeline, the site achieves maximum security and speed without the maintenance overhead of a database or the staleness of a manual portfolio.
+
 ## 🛠️ Tech Stack
 - **Frontend**: React 19, TypeScript, Vite
 - **Routing**: React Router (HashRouter for GitHub Pages compatibility)
