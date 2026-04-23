@@ -6,11 +6,11 @@ export const repoMapping: Record<string, string> = {
   "rit_tracker": "Sabari-Vijayan/RIT_TRACKER",
   "code-a-pooakalam-25": "Sabari-Vijayan/code-a-pooakalam-25",
   "umang-harmony-welfare-society-theme": "Sabari-Vijayan/Umang-Harmony-Welfare-Society-Theme",
+  "portfolio": "Sabari-Vijayan/Portfolio",
   "neurobots-hackathon-2026": "Sabari-Vijayan/neurobots-hackathon-2026",
   "cartinder": "Sabari-Vijayan/cartinder",
   "voiceform": "Sabari-Vijayan/VoiceForm",
-  "dynamic-pricing-ui": "Sabari-Vijayan/Dynamic-Pricing-UI",
-  "portfolio": "Sabari-Vijayan/Portfolio"
+  "dynamic-pricing-ui": "Sabari-Vijayan/Dynamic-Pricing-UI"
 };
 
 export const projectList = [
@@ -52,6 +52,15 @@ export const projectList = [
   },
   {
     "id": 5,
+    "title": "Portfolio",
+    "category": "PROJECT",
+    "description": "A personal showcase built with React, integrated with an AI assistant to answer all your questions about my work instantly.",
+    "link": "https://github.com/Sabari-Vijayan/Portfolio",
+    "date": "2026",
+    "stars": 0
+  },
+  {
+    "id": 6,
     "title": "neurobots-hackathon-2026",
     "category": "PROJECT",
     "description": "An AI-powered system to detect cheating behavior in online exams using Isolation Forest algorithm.",
@@ -60,7 +69,7 @@ export const projectList = [
     "stars": 0
   },
   {
-    "id": 6,
+    "id": 7,
     "title": "cartinder",
     "category": "PROJECT",
     "description": "CarTinder is a modern, full-stack car rental platform with a \"Tinder-style\" swiping experience. Users can swipe through available cars, like their favorites, chat with dealers, and book rides—all in a sleek, responsive interface.",
@@ -69,7 +78,7 @@ export const projectList = [
     "stars": 0
   },
   {
-    "id": 7,
+    "id": 8,
     "title": "VoiceForm",
     "category": "PROJECT",
     "description": "A multilingual voice interface that uses LLMs to conduct natural interviews and transform raw speech into structured, actionable data.",
@@ -78,20 +87,11 @@ export const projectList = [
     "stars": 0
   },
   {
-    "id": 8,
+    "id": 9,
     "title": "Dynamic-Pricing-UI",
     "category": "PROJECT",
     "description": "A dynamic pricing interface built with Angular and Signals to efficiently parse and display complex, nested JSON data.",
     "link": "https://github.com/Sabari-Vijayan/Dynamic-Pricing-UI",
-    "date": "2026",
-    "stars": 0
-  },
-  {
-    "id": 9,
-    "title": "Portfolio",
-    "category": "PROJECT",
-    "description": "A personal showcase built with React, integrated with an AI assistant to answer all your questions about my work instantly.",
-    "link": "https://github.com/Sabari-Vijayan/Portfolio",
     "date": "2026",
     "stars": 0
   }
@@ -124,6 +124,13 @@ export const projectsData = `
 - Stars: 2 | Forks: 2
 - URL: https://github.com/Sabari-Vijayan/Umang-Harmony-Welfare-Society-Theme
 
+## Portfolio
+- Description: A personal showcase built with React, integrated with an AI assistant to answer all your questions about my work instantly.
+- Primary Language: TypeScript
+- Stars: 0 | Forks: 0
+- URL: https://github.com/Sabari-Vijayan/Portfolio
+- Live Site: https://portfolio-liard-alpha-anenqdv7wr.vercel.app
+
 ## neurobots-hackathon-2026
 - Description: An AI-powered system to detect cheating behavior in online exams using Isolation Forest algorithm.
 - Primary Language: JavaScript
@@ -148,13 +155,6 @@ export const projectsData = `
 - Primary Language: HTML
 - Stars: 0 | Forks: 0
 - URL: https://github.com/Sabari-Vijayan/Dynamic-Pricing-UI
-
-## Portfolio
-- Description: A personal showcase built with React, integrated with an AI assistant to answer all your questions about my work instantly.
-- Primary Language: TypeScript
-- Stars: 0 | Forks: 0
-- URL: https://github.com/Sabari-Vijayan/Portfolio
-- Live Site: https://portfolio-liard-alpha-anenqdv7wr.vercel.app
 
 
 Users can browse all projects on the [Portfolio Hub](/portfolio).
