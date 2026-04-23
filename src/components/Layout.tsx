@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from './Navbar';
+import SpotifyStatus from './SpotifyStatus';
 
 interface LayoutProps {
   children: React.ReactNode;

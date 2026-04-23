@@ -83,7 +83,11 @@ const Portfolio: React.FC = () => {
                 <div className="project-main">
                   <h3>{item.title}</h3>
                   <p>{item.description}</p>
-                  <a href={item.link} className="text-link" target="_blank" rel="noopener noreferrer">→ ACCESS REPOSITORY</a>
+                  <a href={item.link} className="text-link" target="_blank" rel="noopener noreferrer">
+                    → {item.category === 'PROJECT' ? 'ACCESS REPOSITORY' : 
+                       item.category === 'DESIGN' ? 'VIEW DESIGN' : 
+                       item.category === 'PAPER' ? 'READ PAPER' : 'VIEW WORK'}
+                  </a>
                 </div>
               </article>
             ))}

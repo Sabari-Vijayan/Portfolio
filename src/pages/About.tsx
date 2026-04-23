@@ -81,7 +81,7 @@ const About: React.FC = () => {
   };
 
   const techStack = [
-    { category: 'FRONTEND', items: 'React, Next.js, TypeScript' },
+    { category: 'FRONTEND', items: 'React, Next.js, Angular' },
     { category: 'BACKEND', items: 'Node.js, Express, Python, C' },
     { category: 'SYSTEMS', items: 'Docker, Linux, Git' },
     { category: 'PRINCIPLES', items: 'SOLID, Clean Architecture, WCAG AAA' },
@@ -195,7 +195,14 @@ const About: React.FC = () => {
                 Architecting a comprehensive Wikipedia for APJKTU University students. 
                 Knowledge distribution at zero cost.
               </p>
-              <Link to="/portfolio" className="text-link">→ VIEW PROJECT HUB</Link>
+              <div className="project-actions">
+                <Link to="/portfolio" className="text-link">→ VIEW PROJECT HUB</Link>
+                
+                <div className="sponsorship-callout">
+                  <p>I am looking for someone to <strong>sponsor me a server</strong> to host this project. If you can help me, please do contact me.</p>
+                  <Link to="/contact" className="contact-btn">CONTACT ME</Link>
+                </div>
+              </div>
             </div>
           </section>
         </main>
@@ -484,14 +491,48 @@ const About: React.FC = () => {
           font-size: 1rem;
           line-height: 1.6;
         }
+        .project-actions {
+          display: flex;
+          flex-direction: column;
+          gap: 2rem;
+        }
         .text-link {
           font-family: inherit;
           font-size: 0.85rem;
           font-weight: 700;
           color: var(--accent-color);
           text-decoration: none;
+          width: fit-content;
         }
         .text-link:hover { text-decoration: underline; }
+
+        .sponsorship-callout {
+          background: var(--nav-bg);
+          padding: 1.5rem;
+          border-left: 3px solid var(--accent-color);
+          border-radius: 4px;
+        }
+        .sponsorship-callout p {
+          font-size: 0.95rem;
+          margin-bottom: 1.25rem;
+          opacity: 0.9;
+        }
+        .contact-btn {
+          display: inline-block;
+          background: var(--accent-color);
+          color: var(--bg-color) !important;
+          padding: 0.6rem 1.5rem;
+          border-radius: 4px;
+          font-weight: 700;
+          text-decoration: none;
+          font-size: 0.8rem;
+          letter-spacing: 0.05em;
+          transition: transform 0.2s, opacity 0.2s;
+        }
+        .contact-btn:hover {
+          transform: translateY(-1px);
+          opacity: 0.9;
+        }
 
         @media (max-width: 850px) {
           .hero-section {
@@ -516,6 +557,7 @@ const About: React.FC = () => {
           .header-meta { font-size: 0.65rem; }
           .ai-input-group { flex-direction: column; }
           .ai-input-group button { padding: 0.75rem; }
+          .sponsorship-callout { text-align: left; }
         }
       `}</style>
     </section>
