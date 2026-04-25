@@ -3,14 +3,14 @@
 
 export const repoMapping: Record<string, string> = {
   "tinkerfetch": "Sabari-Vijayan/tinkerfetch",
+  "portfolio": "Sabari-Vijayan/Portfolio",
   "rit_tracker": "Sabari-Vijayan/RIT_TRACKER",
   "code-a-pooakalam-25": "Sabari-Vijayan/code-a-pooakalam-25",
   "umang-harmony-welfare-society-theme": "Sabari-Vijayan/Umang-Harmony-Welfare-Society-Theme",
-  "portfolio": "Sabari-Vijayan/Portfolio",
+  "dynamic-pricing-ui": "Sabari-Vijayan/Dynamic-Pricing-UI",
   "neurobots-hackathon-2026": "Sabari-Vijayan/neurobots-hackathon-2026",
   "cartinder": "Sabari-Vijayan/cartinder",
-  "voiceform": "Sabari-Vijayan/VoiceForm",
-  "dynamic-pricing-ui": "Sabari-Vijayan/Dynamic-Pricing-UI"
+  "voiceform": "Sabari-Vijayan/VoiceForm"
 };
 
 export const projectList = [
@@ -25,6 +25,15 @@ export const projectList = [
   },
   {
     "id": 2,
+    "title": "Portfolio",
+    "category": "PROJECT",
+    "description": "A personal showcase built with React, integrated with an AI assistant to answer all your questions about my work instantly.",
+    "link": "https://github.com/Sabari-Vijayan/Portfolio",
+    "date": "2026",
+    "stars": 2
+  },
+  {
+    "id": 3,
     "title": "RIT_TRACKER",
     "category": "PROJECT",
     "description": "RIT Tracker is a web-based navigation tool designed to help students, visitors, and faculty easily locate buildings, classrooms, and facilities within our campus. It features an interactive 3D AR view, allowing users to explore campus buildings in detail.",
@@ -33,7 +42,7 @@ export const projectList = [
     "stars": 2
   },
   {
-    "id": 3,
+    "id": 4,
     "title": "code-a-pooakalam-25",
     "category": "PROJECT",
     "description": "Official website for code-a-pookalam 2025 by TinkerHub RIT",
@@ -42,7 +51,7 @@ export const projectList = [
     "stars": 2
   },
   {
-    "id": 4,
+    "id": 5,
     "title": "Umang-Harmony-Welfare-Society-Theme",
     "category": "PROJECT",
     "description": "Official website for Umang Harmony Welfare Society created using Ghost CMS",
@@ -51,16 +60,16 @@ export const projectList = [
     "stars": 2
   },
   {
-    "id": 5,
-    "title": "Portfolio",
+    "id": 6,
+    "title": "Dynamic-Pricing-UI",
     "category": "PROJECT",
-    "description": "A personal showcase built with React, integrated with an AI assistant to answer all your questions about my work instantly.",
-    "link": "https://github.com/Sabari-Vijayan/Portfolio",
+    "description": "A dynamic pricing interface built with Angular and Signals to efficiently parse and display complex, nested JSON data.",
+    "link": "https://github.com/Sabari-Vijayan/Dynamic-Pricing-UI",
     "date": "2026",
     "stars": 0
   },
   {
-    "id": 6,
+    "id": 7,
     "title": "neurobots-hackathon-2026",
     "category": "PROJECT",
     "description": "An AI-powered system to detect cheating behavior in online exams using Isolation Forest algorithm.",
@@ -69,7 +78,7 @@ export const projectList = [
     "stars": 0
   },
   {
-    "id": 7,
+    "id": 8,
     "title": "cartinder",
     "category": "PROJECT",
     "description": "CarTinder is a modern, full-stack car rental platform with a \"Tinder-style\" swiping experience. Users can swipe through available cars, like their favorites, chat with dealers, and book rides—all in a sleek, responsive interface.",
@@ -78,20 +87,11 @@ export const projectList = [
     "stars": 0
   },
   {
-    "id": 8,
+    "id": 9,
     "title": "VoiceForm",
     "category": "PROJECT",
     "description": "A multilingual voice interface that uses LLMs to conduct natural interviews and transform raw speech into structured, actionable data.",
     "link": "https://github.com/Sabari-Vijayan/VoiceForm",
-    "date": "2026",
-    "stars": 0
-  },
-  {
-    "id": 9,
-    "title": "Dynamic-Pricing-UI",
-    "category": "PROJECT",
-    "description": "A dynamic pricing interface built with Angular and Signals to efficiently parse and display complex, nested JSON data.",
-    "link": "https://github.com/Sabari-Vijayan/Dynamic-Pricing-UI",
     "date": "2026",
     "stars": 0
   }
@@ -105,6 +105,13 @@ export const projectsData = `
 - Primary Language: Shell
 - Stars: 17 | Forks: 0
 - URL: https://github.com/Sabari-Vijayan/tinkerfetch
+
+## Portfolio
+- Description: A personal showcase built with React, integrated with an AI assistant to answer all your questions about my work instantly.
+- Primary Language: TypeScript
+- Stars: 2 | Forks: 0
+- URL: https://github.com/Sabari-Vijayan/Portfolio
+- Live Site: https://portfolio-liard-alpha-anenqdv7wr.vercel.app
 
 ## RIT_TRACKER
 - Description: RIT Tracker is a web-based navigation tool designed to help students, visitors, and faculty easily locate buildings, classrooms, and facilities within our campus. It features an interactive 3D AR view, allowing users to explore campus buildings in detail.
@@ -124,12 +131,12 @@ export const projectsData = `
 - Stars: 2 | Forks: 2
 - URL: https://github.com/Sabari-Vijayan/Umang-Harmony-Welfare-Society-Theme
 
-## Portfolio
-- Description: A personal showcase built with React, integrated with an AI assistant to answer all your questions about my work instantly.
+## Dynamic-Pricing-UI
+- Description: A dynamic pricing interface built with Angular and Signals to efficiently parse and display complex, nested JSON data.
 - Primary Language: TypeScript
 - Stars: 0 | Forks: 0
-- URL: https://github.com/Sabari-Vijayan/Portfolio
-- Live Site: https://portfolio-liard-alpha-anenqdv7wr.vercel.app
+- URL: https://github.com/Sabari-Vijayan/Dynamic-Pricing-UI
+- Live Site: https://dynamic-pricing-ui-alpha.vercel.app
 
 ## neurobots-hackathon-2026
 - Description: An AI-powered system to detect cheating behavior in online exams using Isolation Forest algorithm.
@@ -149,12 +156,6 @@ export const projectsData = `
 - Primary Language: JavaScript
 - Stars: 0 | Forks: 0
 - URL: https://github.com/Sabari-Vijayan/VoiceForm
-
-## Dynamic-Pricing-UI
-- Description: A dynamic pricing interface built with Angular and Signals to efficiently parse and display complex, nested JSON data.
-- Primary Language: HTML
-- Stars: 0 | Forks: 0
-- URL: https://github.com/Sabari-Vijayan/Dynamic-Pricing-UI
 
 
 Users can browse all projects on the [Portfolio Hub](/portfolio).
