@@ -30,7 +30,7 @@ export const projectList = [
     "description": "A personal showcase built with React, integrated with an AI assistant to answer all your questions about my work instantly.",
     "link": "https://github.com/Sabari-Vijayan/Portfolio",
     "date": "2026",
-    "stars": 2
+    "stars": 3
   },
   {
     "id": 3,
@@ -109,7 +109,7 @@ export const projectsData = `
 ## Portfolio
 - Description: A personal showcase built with React, integrated with an AI assistant to answer all your questions about my work instantly.
 - Primary Language: TypeScript
-- Stars: 2 | Forks: 0
+- Stars: 3 | Forks: 0
 - URL: https://github.com/Sabari-Vijayan/Portfolio
 - Live Site: https://portfolio-liard-alpha-anenqdv7wr.vercel.app
 
