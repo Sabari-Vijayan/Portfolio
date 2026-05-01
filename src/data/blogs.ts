@@ -3,6 +3,13 @@
 
 export const blogList = [
   {
+    "title": "Keep Your Portfolio in Sync With GitHub, Automatically",
+    "link": "https://medium.com/@vijayansabari06/keep-your-portfolio-in-sync-with-github-automatically-71c76579468f?source=rss-2c891f151b3f------2",
+    "date": "Thu, 23 Apr 2026 11:14:11 GMT",
+    "summary": "Your portfolio is only as good as how up-to-date it is. But manually copying project details every time you push something new is tedious, error-prone, and the kind of chore you’ll keep skipping. Here...",
+    "image": "https://cdn-images-1.medium.com/max/1024/1*ztad2BJICb1zcUTD8qsodQ.png"
+  },
+  {
     "title": "Short Form content is killing you?",
     "link": "https://medium.com/@vijayansabari06/short-form-content-is-killing-you-5b63cef9fa60?source=rss-2c891f151b3f------2",
     "date": "Wed, 15 Apr 2026 08:07:50 GMT",
@@ -13,6 +20,11 @@ export const blogList = [
 
 export const blogsData = `
 # SABARI VIJAYAN - AUTOMATED BLOG INDEX (MEDIUM)
+
+## Keep Your Portfolio in Sync With GitHub, Automatically
+- Published: Thu, 23 Apr 2026 11:14:11 GMT
+- Link: https://medium.com/@vijayansabari06/keep-your-portfolio-in-sync-with-github-automatically-71c76579468f?source=rss-2c891f151b3f------2
+- Summary: Your portfolio is only as good as how up-to-date it is. But manually copying project details every time you push something new is tedious, error-prone, and the kind of chore you’ll keep skipping. Here...
 
 ## Short Form content is killing you?
 - Published: Wed, 15 Apr 2026 08:07:50 GMT
