@@ -21,7 +21,7 @@ export const projectList = [
     "description": "Tinkerfetch is a terminal-based \"TinkerHub\" themed system information tool. It's a custom-designed \"skin\" for the Fastfetch engine, featuring a dedicated mode to track upcoming community events.",
     "link": "https://github.com/Sabari-Vijayan/tinkerfetch",
     "date": "2026",
-    "stars": 18
+    "stars": 19
   },
   {
     "id": 2,
@@ -103,7 +103,7 @@ export const projectsData = `
 ## tinkerfetch
 - Description: Tinkerfetch is a terminal-based "TinkerHub" themed system information tool. It's a custom-designed "skin" for the Fastfetch engine, featuring a dedicated mode to track upcoming community events.
 - Primary Language: Shell
-- Stars: 18 | Forks: 0
+- Stars: 19 | Forks: 0
 - URL: https://github.com/Sabari-Vijayan/tinkerfetch
 
 ## Portfolio
