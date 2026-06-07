@@ -7,6 +7,7 @@ export const repoMapping: Record<string, string> = {
   "rit_tracker": "Sabari-Vijayan/RIT_TRACKER",
   "code-a-pooakalam-25": "Sabari-Vijayan/code-a-pooakalam-25",
   "umang-harmony-welfare-society-theme": "Sabari-Vijayan/Umang-Harmony-Welfare-Society-Theme",
+  "git-together": "Sabari-Vijayan/Git-Together",
   "dynamic-pricing-ui": "Sabari-Vijayan/Dynamic-Pricing-UI",
   "neurobots-hackathon-2026": "Sabari-Vijayan/neurobots-hackathon-2026",
   "cartinder": "Sabari-Vijayan/cartinder",
@@ -61,6 +62,15 @@ export const projectList = [
   },
   {
     "id": 6,
+    "title": "Git-Together",
+    "category": "PROJECT",
+    "description": "A fun github based game in which to win you have to follow and gain the maximum number of followers in the given time.",
+    "link": "https://github.com/Sabari-Vijayan/Git-Together",
+    "date": "2026",
+    "stars": 0
+  },
+  {
+    "id": 7,
     "title": "Dynamic-Pricing-UI",
     "category": "PROJECT",
     "description": "A dynamic pricing interface built with Angular and Signals to efficiently parse and display complex, nested JSON data.",
@@ -69,7 +79,7 @@ export const projectList = [
     "stars": 0
   },
   {
-    "id": 7,
+    "id": 8,
     "title": "neurobots-hackathon-2026",
     "category": "PROJECT",
     "description": "An AI-powered system to detect cheating behavior in online exams using Isolation Forest algorithm.",
@@ -78,7 +88,7 @@ export const projectList = [
     "stars": 0
   },
   {
-    "id": 8,
+    "id": 9,
     "title": "cartinder",
     "category": "PROJECT",
     "description": "CarTinder is a modern, full-stack car rental platform with a \"Tinder-style\" swiping experience. Users can swipe through available cars, like their favorites, chat with dealers, and book rides—all in a sleek, responsive interface.",
@@ -87,7 +97,7 @@ export const projectList = [
     "stars": 0
   },
   {
-    "id": 9,
+    "id": 10,
     "title": "VoiceForm",
     "category": "PROJECT",
     "description": "A multilingual voice interface that uses LLMs to conduct natural interviews and transform raw speech into structured, actionable data.",
@@ -130,6 +140,13 @@ export const projectsData = `
 - Primary Language: CSS
 - Stars: 2 | Forks: 2
 - URL: https://github.com/Sabari-Vijayan/Umang-Harmony-Welfare-Society-Theme
+
+## Git-Together
+- Description: A fun github based game in which to win you have to follow and gain the maximum number of followers in the given time.
+- Primary Language: TypeScript
+- Stars: 0 | Forks: 0
+- URL: https://github.com/Sabari-Vijayan/Git-Together
+- Live Site: https://git-together-enj7.vercel.app
 
 ## Dynamic-Pricing-UI
 - Description: A dynamic pricing interface built with Angular and Signals to efficiently parse and display complex, nested JSON data.
