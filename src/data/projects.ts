@@ -7,9 +7,9 @@ export const repoMapping: Record<string, string> = {
   "rit_tracker": "Sabari-Vijayan/RIT_TRACKER",
   "code-a-pooakalam-25": "Sabari-Vijayan/code-a-pooakalam-25",
   "umang-harmony-welfare-society-theme": "Sabari-Vijayan/Umang-Harmony-Welfare-Society-Theme",
+  "neurobots-hackathon-2026": "Sabari-Vijayan/neurobots-hackathon-2026",
   "git-together": "Sabari-Vijayan/Git-Together",
   "dynamic-pricing-ui": "Sabari-Vijayan/Dynamic-Pricing-UI",
-  "neurobots-hackathon-2026": "Sabari-Vijayan/neurobots-hackathon-2026",
   "cartinder": "Sabari-Vijayan/cartinder",
   "voiceform": "Sabari-Vijayan/VoiceForm"
 };
@@ -62,6 +62,15 @@ export const projectList = [
   },
   {
     "id": 6,
+    "title": "neurobots-hackathon-2026",
+    "category": "PROJECT",
+    "description": "An AI-powered system to detect cheating behavior in online exams using Isolation Forest algorithm.",
+    "link": "https://github.com/Sabari-Vijayan/neurobots-hackathon-2026",
+    "date": "2026",
+    "stars": 1
+  },
+  {
+    "id": 7,
     "title": "Git-Together",
     "category": "PROJECT",
     "description": "A fun github based game in which to win you have to follow and gain the maximum number of followers in the given time.",
@@ -70,20 +79,11 @@ export const projectList = [
     "stars": 0
   },
   {
-    "id": 7,
+    "id": 8,
     "title": "Dynamic-Pricing-UI",
     "category": "PROJECT",
     "description": "A dynamic pricing interface built with Angular and Signals to efficiently parse and display complex, nested JSON data.",
     "link": "https://github.com/Sabari-Vijayan/Dynamic-Pricing-UI",
-    "date": "2026",
-    "stars": 0
-  },
-  {
-    "id": 8,
-    "title": "neurobots-hackathon-2026",
-    "category": "PROJECT",
-    "description": "An AI-powered system to detect cheating behavior in online exams using Isolation Forest algorithm.",
-    "link": "https://github.com/Sabari-Vijayan/neurobots-hackathon-2026",
     "date": "2026",
     "stars": 0
   },
@@ -141,6 +141,12 @@ export const projectsData = `
 - Stars: 2 | Forks: 2
 - URL: https://github.com/Sabari-Vijayan/Umang-Harmony-Welfare-Society-Theme
 
+## neurobots-hackathon-2026
+- Description: An AI-powered system to detect cheating behavior in online exams using Isolation Forest algorithm.
+- Primary Language: JavaScript
+- Stars: 1 | Forks: 3
+- URL: https://github.com/Sabari-Vijayan/neurobots-hackathon-2026
+
 ## Git-Together
 - Description: A fun github based game in which to win you have to follow and gain the maximum number of followers in the given time.
 - Primary Language: TypeScript
@@ -154,12 +160,6 @@ export const projectsData = `
 - Stars: 0 | Forks: 0
 - URL: https://github.com/Sabari-Vijayan/Dynamic-Pricing-UI
 - Live Site: https://dynamic-pricing-ui-alpha.vercel.app
-
-## neurobots-hackathon-2026
-- Description: An AI-powered system to detect cheating behavior in online exams using Isolation Forest algorithm.
-- Primary Language: JavaScript
-- Stars: 0 | Forks: 3
-- URL: https://github.com/Sabari-Vijayan/neurobots-hackathon-2026
 
 ## cartinder
 - Description: CarTinder is a modern, full-stack car rental platform with a "Tinder-style" swiping experience. Users can swipe through available cars, like their favorites, chat with dealers, and book rides—all in a sleek, responsive interface.
