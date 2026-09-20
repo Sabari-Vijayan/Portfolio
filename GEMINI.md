@@ -6,7 +6,6 @@ This document serves as a foundational reference for the architecture, design, a
 - **Owner:** Sabari Vijayan
 - **Purpose:** A professional, minimal, and highly accessible developer portfolio.
 - **Current Education:** B.Tech in Computer Science, RIT Kottayam (2023–2027).
-- **Location:** Pathanamthitta, Kerala, India.
 
 ## Tech Stack
 - **Framework:** React 19 (Vite + TypeScript)

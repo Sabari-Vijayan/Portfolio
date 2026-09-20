@@ -33,8 +33,6 @@ const Contact: React.FC = () => {
   };
 
   const contactMethods = [
-    { label: 'EMAIL', value: 'vijayansabari06@gmail.com', link: 'mailto:vijayansabari06@gmail.com' },
-    { label: 'PHONE', value: '+91 8590483660', link: 'tel:+918590483660' },
     { label: 'LINKEDIN', value: 'sabari-vijayan', link: 'https://www.linkedin.com/in/sabari-vijayan-a07107308/' },
     { label: 'GITHUB', value: 'Sabari-Vijayan', link: 'https://github.com/Sabari-Vijayan' },
     { label: 'EXTERNAL', value: 'linktr.ee/sabarivijayan', link: 'https://linktr.ee/sabarivijayan' },
@@ -50,10 +48,6 @@ const Contact: React.FC = () => {
       <div className="main-grid">
         <aside className="sidebar">
           <h2 className="section-label">REACH OUT</h2>
-          <div className="location-box">
-            <p className="label">LOCATION</p>
-            <p>Pathanamthitta, Kerala, India</p>
-          </div>
           <div className="availability-box">
             <p className="label">AVAILABILITY</p>
             <p>Open to collaborations and architectural discussions.</p>

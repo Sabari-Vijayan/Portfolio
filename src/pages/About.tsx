@@ -85,7 +85,7 @@ const About: React.FC = () => {
     <section className="home-container">
       <div className="header-meta">
         <span>SABARI VIJAYAN</span>
-        <span>PATHANAMTHITTA, IN</span>
+        <span>SOFTWARE ARCHITECT</span>
       </div>
 
       <div className="about-layout">
