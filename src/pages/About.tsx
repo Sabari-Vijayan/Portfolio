@@ -2,8 +2,9 @@ import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Send, Bot, Loader2 } from 'lucide-react';
 
-// Absolute URL required because frontend is on GitHub Pages and API is on Vercel
-const API_URL = 'https://portfolio-liard-alpha-anenqdv7wr.vercel.app/api/chat';
+// In local dev (vercel dev / vite) hit local edge function so you see server logs locally.
+// In prod (GH Pages) hit Vercel deployment.
+const API_URL = import.meta.env.DEV ? '/api/chat' : 'https://portfolio-liard-alpha-anenqdv7wr.vercel.app/api/chat';
 
 const About: React.FC = () => {
   const [query, setQuery] = useState('');
@@ -37,38 +38,31 @@ const About: React.FC = () => {
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
       let accumulatedText = '';
-      let buffer = ''; // Buffer for partial chunks
+      let buffer = '';
 
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
-
         buffer += decoder.decode(value, { stream: true });
         const lines = buffer.split('\n');
         buffer = lines.pop() || '';
-
         for (const line of lines) {
           if (!line.trim()) continue;
           try {
             const data = JSON.parse(line);
-            if (data.source) {
-              setSource(data.source);
-            }
+            if (data.source) setSource(data.source);
             if (data.text) {
-              // Authentic "Token" rhythm: Split into words/spaces to mimic model generation
               const words = data.text.match(/(\s+|\S+)/g) || [];
               for (const word of words) {
                 accumulatedText += word;
                 setResponse(accumulatedText);
-                // Faster than character typing, but maintains the "chunk" rhythm
-                await new Promise(resolve => setTimeout(resolve, 25)); 
+                await new Promise(resolve => setTimeout(resolve, 25));
               }
             }
-            if (data.error) {
-              throw new Error(data.error);
-            }
+            if (data.error) throw new Error(data.error);
           } catch (err) {
-            console.error("Parse error:", err, "Line:", line);
+            if (err instanceof SyntaxError) console.error("Parse error:", err, "Line:", line);
+            else throw err;
           }
         }
       }

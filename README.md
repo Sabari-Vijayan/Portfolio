@@ -4,11 +4,13 @@ A minimal, architectural, and highly automated portfolio showcasing my journey a
 
 ## 🚀 Key Features
 
-### 🤖 Portfolio Intelligence (AI Orchestrator)
+### 🤖 Portfolio Intelligence (AI Orchestrator — Jev Router + Gemini Generator)
 The home page features a custom AI assistant that acts as a professional representative.
-- **Dynamic Context**: It retrieves real-time data from GitHub to answer questions about specific repositories, tech stacks, and project status.
+- **Jev-Powered Routing**: `~typesafe/jev-latest` (via OpenRouter Decisions API) classifies your query into typed signals — `noul` (yes/no probability) for context/repo intents + `score` for frustration/complexity — with fuzzy semantic matching (typos, partial names, descriptions like `car swipe app → cartinder` count).
+- **Dynamic Context**: Loads only the needed `bio`/`experience`/`projects`/`blogs` bundles and concurrently live-fetches GitHub metadata (stars/forks) for detected repos.
+- **Adaptive Tone**: Urgency/frustration/complexity signals steer the generator to be concise/empathetic/structured without you asking.
 - **Natural Conversation**: Designed to provide insightful, conversational responses rather than simple redirects.
-- **Architecture**: Powered by a dual-LLM (Router-Generator) pattern hosted on Vercel.
+- **Architecture**: **Router-Generator** pattern hosted on Vercel Edge — Jev router (typed, fast/cheap) → Gemini generator (`gemini-3.5-flash-lite`), with Gemini JSON fallback if Jev is unavailable.
 
 ### 📄 Intelligent Document Hub
 A dedicated space for academic and professional credentials.
@@ -33,8 +35,9 @@ This website is built as a **Hybrid Jamstack (Living Static Site)**. It exists i
 - **Frontend**: React 19, TypeScript, Vite
 - **Routing**: React Router (HashRouter for GitHub Pages compatibility)
 - **Styling**: Modern CSS with a focus on WCAG 2.0 AAA accessibility standards.
-- **Backend/API**: Vercel Serverless Functions (Node.js)
-- **AI**: Google Gemini Pro & Flash models
+- **Backend/API**: Vercel Edge Functions (Node.js)
+- **AI Router**: Typesafe Jev (`~typesafe/jev-latest`) via OpenRouter Decisions API (`@openrouter/sdk`) — `noul`/`score`/`choice` typed questions, semantic fuzzy matching, calibrated probabilities.
+- **AI Generator**: Google Gemini (`gemini-3.5-flash-lite`, streaming) via `@google/generative-ai`; doubles as JSON-mode router fallback.
 
 ## 📖 Learn More & Automate Your Own
 I have documented the automation strategy used in this project so others can implement similar systems.

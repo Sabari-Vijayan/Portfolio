@@ -26,3 +26,4 @@ arch.txt
 *.sw?
 .vercel
 .env*.local
+.env*
