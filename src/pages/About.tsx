@@ -91,13 +91,14 @@ const About: React.FC = () => {
       <div className="about-layout">
         <section className="hero-section">
           <aside className="sidebar">
-            <div className="image-frame">
+            {/* Profile image hidden for privacy — uncomment to restore */}
+            {/* <div className="image-frame">
               <img 
                 src="profile-long.png" 
                 alt="Sabari Vijayan" 
                 className="profile-image"
               />
-            </div>
+            </div> */}
             <div className="sidebar-links">
               <a href="https://github.com/Sabari-Vijayan" target="_blank" rel="noopener noreferrer">GITHUB</a>
               <a href="https://www.linkedin.com/in/sabari-vijayan-a07107308/" target="_blank" rel="noopener noreferrer">LINKEDIN</a>
