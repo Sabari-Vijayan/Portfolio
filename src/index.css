@@ -6,6 +6,11 @@
   --border-color: #dee2e6;
   --transition-speed: 0.3s;
   --icon-filter: none;
+  /* Always reserve space for the classic scrollbar on the viewport.
+     The hamburger menu locks body scroll when open; without this the
+     scrollbar vanishes, the viewport widens, and centered content
+     jerks sideways on every toggle. */
+  scrollbar-gutter: stable;
 }
 
 [data-theme="dark"] {
