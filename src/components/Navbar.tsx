@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Sun, Moon } from 'lucide-react';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -13,11 +14,15 @@ const Navbar: React.FC = () => {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setIsOpen(false);
+      if (e.key === 'Escape' && isOpen) {
+        setIsOpen(false);
+        // Return focus to the trigger so it never stays inside the hidden drawer.
+        menuButtonRef.current?.focus();
+      }
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, []);
+  }, [isOpen]);
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : '';
@@ -34,6 +39,7 @@ const Navbar: React.FC = () => {
     { to: '/portfolio', label: 'Portfolio' },
     { to: '/blog', label: 'Blog' },
     { to: '/documents', label: 'Documents' },
+    { to: '/gifts', label: 'Gifts' },
     { to: '/contact', label: 'Contact' },
   ];
 
@@ -48,7 +54,7 @@ const Navbar: React.FC = () => {
           <button onClick={toggleTheme} className="theme-toggle" aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}>
             {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
           </button>
-          <button className={`hamburger-btn ${isOpen ? 'open' : ''}`} onClick={() => setIsOpen(!isOpen)} aria-expanded={isOpen} aria-controls="site-menu" aria-label="Toggle menu">
+          <button ref={menuButtonRef} className={`hamburger-btn ${isOpen ? 'open' : ''}`} onClick={() => setIsOpen(!isOpen)} aria-expanded={isOpen} aria-controls="site-menu" aria-label="Toggle menu">
             <span className="hamburger-line"></span>
             <span className="hamburger-line"></span>
             <span className="hamburger-line"></span>
@@ -57,10 +63,10 @@ const Navbar: React.FC = () => {
       </nav>
 
       <div className={`menu-overlay ${isOpen ? 'open' : ''}`} onClick={() => setIsOpen(false)}>
-        <ul id="site-menu" className={`menu-links ${isOpen ? 'open' : ''}`} onClick={e => e.stopPropagation()} aria-hidden={!isOpen}>
+        <ul id="site-menu" className={`menu-links ${isOpen ? 'open' : ''}`} onClick={e => e.stopPropagation()} aria-hidden={!isOpen} inert={!isOpen}>
           {navLinks.map((link, i) => (
             <li key={link.to} style={{ ['--i' as string]: i } as React.CSSProperties}>
-              <NavLink to={link.to} onClick={() => setIsOpen(false)} tabIndex={isOpen ? 0 : -1} className={({ isActive }) => isActive ? 'active-link' : ''}>
+              <NavLink to={link.to} onClick={(e) => { e.currentTarget.blur(); setIsOpen(false); }} tabIndex={isOpen ? 0 : -1} className={({ isActive }) => isActive ? 'active-link' : ''}>
                 {link.label}
               </NavLink>
             </li>
