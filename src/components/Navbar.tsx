@@ -115,9 +115,8 @@ const Navbar: React.FC = () => {
         .menu-links.open { transform: translateX(0); }
         .menu-links li { opacity: 0; transform: translateX(16px); transition: opacity 0.28s ease, transform 0.32s ease; }
         .menu-links.open li { opacity: 1; transform: translateX(0); transition-delay: calc(0.08s + var(--i) * 0.05s); }
-        .menu-links a { color: var(--text-color); font-size: 1.25rem; font-weight: 500; display: block; padding: 0.7rem 0.25rem; border-bottom: 1px solid var(--border-color); }
+        .menu-links a { color: var(--text-color); font-size: 1.25rem; font-weight: 500; display: block; padding: 0.7rem 0.25rem; border-bottom: 1px solid var(--border-color); transition: color 0.2s ease, padding-left 0.25s ease; }
         .menu-links a:hover { color: var(--accent-color); padding-left: 0.5rem; }
-        .menu-links a { transition: color 0.2s ease, padding-left 0.25s ease; }
         @media (prefers-reduced-motion: reduce) {
           .menu-overlay, .menu-links, .menu-links li, .menu-links a, .hamburger-line { transition: none; }
           .menu-links li { opacity: 1; transform: none; }
